@@ -1,0 +1,23 @@
+{
+  "name": "mernchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freelancerbanna/mern-chat-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freelancerbanna/mern-chat-app/issues"
+  },
+  "homepage": "https://github.com/freelancerbanna/mern-chat-app#readme",
+  "dependencies": {
+    "concurrently": "^7.2.2"
+  }
+}
