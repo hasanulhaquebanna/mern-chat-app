@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Register = () => {
   //
   const googleAuth = () => {
-    window.open(`/api/auth/google/callback`, "_self");
+    window.open(`${process.env.SERVER}/api/auth/google/callback`, "_self");
   };
   //
   return (
