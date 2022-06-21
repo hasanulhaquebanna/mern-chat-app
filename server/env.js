@@ -1,3 +1,3 @@
-const { PORT, DB, CLIENTID, SECRETID, CLIENTURL } = process.env;
+const { PORT, DB, CLIENTID, CLIENTSECRET, CLIENTURL } = process.env;
 
-module.exports = { PORT, DB, CLIENTID, SECRETID, CLIENTURL };
+module.exports = { PORT, DB, CLIENTID, CLIENTSECRET, CLIENTURL };

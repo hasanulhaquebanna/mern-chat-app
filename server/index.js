@@ -8,6 +8,7 @@ const app = express();
 
 //
 const { DB, PORT } = require("./env");
+const passportSetup = require("./passport");
 
 // server middleware
 app.use(
