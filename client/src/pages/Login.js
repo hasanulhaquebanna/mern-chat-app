@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = ({ styles }) => {
+  //
   const googleAuth = () => {};
+  //
   return (
     <div className={styles.container}>
       <h1 className="text-[40px] font-semibold text-[#2c444e] relative flex items-center justify--center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-[#2c444e] after:absolute">
