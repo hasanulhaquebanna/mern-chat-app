@@ -7,10 +7,10 @@ const { CLIENTURL } = require("../env");
 
 // passprort with oauth20
 router.get("/auth/login/success");
-router.get("/auth/goggle/callback", googleCallBack);
+router.get("/auth/google/callback", googleCallBack);
 router.get("/auth/login/failed", loginFailed);
 router.get(
-  "/auth/goggle",
+  "/auth/google",
   passport.authenticate("google", ["profile", "email"])
 );
 router.get("/auth/logout", (req, res) => {

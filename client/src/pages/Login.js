@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Login = ({ styles }) => {
   //
   const googleAuth = () => {
-    window.open(`${process.env.SERVER}/api/auth/google/callback`, "_self");
+    window.open(`${process.env.REACT_APP_SERVER}auth/google/callback`, "_self");
   };
   //
   return (
