@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 
 const Login = ({ styles }) => {
   //
-  const googleAuth = () => {};
+  const googleAuth = () => {
+    window.open(`/api/auth/google/callback`, "_self");
+  };
   //
   return (
-    <div className="flex w-full flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <h1 className="text-[40px] font-semibold text-[#2c444e] relative flex items-center justify--center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-[#2c444e] after:absolute">
         Log in Form
       </h1>
-      <div className="flex p-16 mt-[45px] w-[800px] h-[450px] bg-white shadow-formContainer">
+      <div className="flex p-16 mt-[45px] w-[800px] h-[450px] bg-white shadow-formContainer rounded-[30px]">
         <div className="flex-[1.5] overflow-hidden relative rounded-tl-[50px] rounded-bl-[50px]">
           <img
             className="w-[160%] absolute -left-[150px] -top-[50px]"
@@ -18,7 +20,7 @@ const Login = ({ styles }) => {
             alt="login"
           />
         </div>
-        <div className="flex-2 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center flex-2">
           <h2 className="text-[25px] font-normal text-[#2c444e] mb-[30px]">
             Members Log in
           </h2>
@@ -49,7 +51,10 @@ const Login = ({ styles }) => {
           </button>
           <p className="text-sm text-[#2c444e] m-[5px] mx-0 p-0">
             New Here ?{" "}
-            <Link to="/signup" className="text-base font-medium text-[#ffc801]">
+            <Link
+              to="/register"
+              className="text-base font-medium text-[#ffc801]"
+            >
               Sing Up
             </Link>
           </p>
