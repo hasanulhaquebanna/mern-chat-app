@@ -6,6 +6,9 @@ const App = () => {
   return (
     <div>
       <Switch>
+        <Route path="/" exact>
+          <div></div>
+        </Route>
         <Route path="/login">
           <Login />
         </Route>

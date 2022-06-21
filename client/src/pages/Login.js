@@ -6,11 +6,11 @@ const Login = ({ styles }) => {
   const googleAuth = () => {};
   //
   return (
-    <div className={styles.container}>
+    <div className="flex w-full flex-col justify-center items-center">
       <h1 className="text-[40px] font-semibold text-[#2c444e] relative flex items-center justify--center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-[#2c444e] after:absolute">
         Log in Form
       </h1>
-      <div className="flex  mt-[45px] w-[800px] h-[450px] bg-white shadow-formContainer">
+      <div className="flex p-16 mt-[45px] w-[800px] h-[450px] bg-white shadow-formContainer">
         <div className="flex-[1.5] overflow-hidden relative rounded-tl-[50px] rounded-bl-[50px]">
           <img
             className="w-[160%] absolute -left-[150px] -top-[50px]"
