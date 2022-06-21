@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const { readdirSync } = require("fs");
 const app = express();
 
 //
@@ -27,6 +28,9 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+// listening all routes
+readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
 
 // database and port connetion
 mongoose

@@ -6,11 +6,14 @@ const loginFailed = require("../controllers/auth/loginFailed");
 const { CLIENTURL } = require("../env");
 
 // passprort with oauth20
-router.get("/login/success");
-router.get("/goggle/callback", googleCallBack);
-router.get("/login/failed", loginFailed);
-router.get("/goggle", passport.authenticate("google", ["profile", "email"]));
-router.get("/logout", (req, res) => {
+router.get("/aut/login/success");
+router.get("/aut/goggle/callback", googleCallBack);
+router.get("/aut/login/failed", loginFailed);
+router.get(
+  "/aut/goggle",
+  passport.authenticate("google", ["profile", "email"])
+);
+router.get("/aut/logout", (req, res) => {
   req.logOut();
   res.redirect(CLIENTURL);
 });
