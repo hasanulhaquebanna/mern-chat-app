@@ -1,9 +1,8 @@
-const asyncHandler = require("express-async-handler");
 const generateToken = require("../../helpers/generateToken.js");
 
 const User = require("../../models/users.js");
 
-module.exports = asyncHandler(async (req, res) => {
+module.exports = async (req, res) => {
   const { name, email, password, picture } = req.body;
   console.log(name, email, password, picture);
   try {
@@ -19,7 +18,7 @@ module.exports = asyncHandler(async (req, res) => {
           message: "User already exists!",
         });
       }
-      const user = await User.create({
+      const user = await new User.create({
         name,
         email,
         password,
@@ -37,4 +36,4 @@ module.exports = asyncHandler(async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
-});
+};

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const userModel = mongoose.Schema(
+const userModel = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
@@ -13,7 +13,7 @@ const userModel = mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     picture: {
       type: String,

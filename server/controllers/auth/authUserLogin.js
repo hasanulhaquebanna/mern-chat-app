@@ -1,8 +1,6 @@
-const asyncHandler = require("express-async-handler");
-
 const User = require("../../models/users.js");
 
-module.exports = asyncHandler(async (req, res) => {
+module.exports = async (req, res) => {
   const { name, email, password, picture } = req.body;
   try {
     if (!name || !email || !password) {
@@ -30,4 +28,4 @@ module.exports = asyncHandler(async (req, res) => {
         });
     }
   } catch (error) {}
-});
+};
