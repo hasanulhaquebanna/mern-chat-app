@@ -17,6 +17,7 @@ app.use(
     origin: "http://localhost:3000",
     methods: ["GET", "PUT", "DELETE", "UPDATE", "POST"],
     credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 app.use(
