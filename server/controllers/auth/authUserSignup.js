@@ -4,17 +4,17 @@ const generateToken = require("../../helpers/generateToken.js");
 const User = require("../../models/users.js");
 
 module.exports = asyncHandler(async (req, res) => {
+  const { name, email, password, picture } = req.body;
+  console.log(name, email, password, picture);
   try {
-    const { name, email, password, picture } = req.body;
-    console.log(name, email, password, picture);
     if (!name || !email || !password) {
-      res.status(404).json({
+      return res.status(404).json({
         error: true,
         message: "Please fillup required credentials.",
       });
       const useExist = await User.findOne({ email });
       if (userExist) {
-        res.status(404).json({
+        return res.status(404).json({
           error: true,
           message: "User already exists!",
         });
@@ -34,5 +34,7 @@ module.exports = asyncHandler(async (req, res) => {
           token: generateToken(user._id),
         });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
 });
