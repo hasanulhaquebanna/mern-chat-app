@@ -1,10 +1,12 @@
 const asyncHandler = require("express-async-handler");
+const generateToken = require("../../helpers/generateToken.js");
 
 const User = require("../../models/users.js");
 
 module.exports = asyncHandler(async (req, res) => {
-  const { name, email, password, picture } = req.body;
   try {
+    const { name, email, password, picture } = req.body;
+    console.log(name, email, password, picture);
     if (!name || !email || !password) {
       res.status(404).json({
         error: true,
@@ -23,10 +25,13 @@ module.exports = asyncHandler(async (req, res) => {
         password,
         picture,
       });
+      user.password = undefined;
       user &&
         res.status(200).json({
           success: true,
           message: "Successfully created a new user.",
+          ...user,
+          token: generateToken(user._id),
         });
     }
   } catch (error) {}

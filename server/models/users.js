@@ -4,7 +4,7 @@ const userModel = mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
@@ -13,7 +13,7 @@ const userModel = mongoose.Schema(
     },
     password: {
       type: String,
-      require: true,
+      required: true,
     },
     picture: {
       type: String,

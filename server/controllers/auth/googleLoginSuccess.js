@@ -2,7 +2,7 @@ module.exports = async (req, res) => {
   try {
     if (req.user) {
       res.status(200).json({
-        error: false,
+        success: true,
         message: "Successfully logged in",
         user: req.user,
       });

@@ -4,6 +4,8 @@ const passport = require("passport");
 const googleCallBack = require("../controllers/auth/googleCallBack");
 const googleLoginFailed = require("../controllers/auth/googleLoginFailed");
 const googleLoginSuccess = require("../controllers/auth/googleLoginSuccess");
+const authUserLogin = require("../controllers/auth/authUserLogin");
+const authUserSignup = require("../controllers/auth/authUserSignup");
 const { CLIENTURL } = require("../env");
 
 // passprort with oauth20
@@ -20,5 +22,6 @@ router.get("/auth/logout", (req, res) => {
 });
 // rest api routes
 router.post("/auth/user/login", authUserLogin);
+router.post("/auth/user/signup", authUserSignup);
 
 module.exports = router;
