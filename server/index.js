@@ -22,10 +22,11 @@ app.use(
 app.use(
   cookieSession({
     name: "session",
-    keys: ["kothabatra"],
+    keys: ["kothabarta"],
     maxAge: 24 * 60 * 60 * 200,
   })
 );
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 

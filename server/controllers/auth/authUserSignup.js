@@ -4,6 +4,8 @@ const User = require("../../models/users.js");
 
 module.exports = asyncHandler(async (req, res) => {
   const { name, email, password, picture } = req.body;
+  console.log(name, email, password, picture);
+
   try {
     if (!name || !email || !password) {
       res.status(404).json({
@@ -17,12 +19,12 @@ module.exports = asyncHandler(async (req, res) => {
           message: "User already exists!",
         });
       }
-      const user = await User.create({
+      const user = await new User({
         name,
         email,
         password,
         picture,
-      });
+      }).save();
       user &&
         res.status(200).json({
           success: true,
