@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
       res.status(200).json({
         success: true,
         message: "Successfully created a new user.",
-        id: newUser.id,
+        id: newUser._id,
         name: newUser.name,
         email: newUser.email,
         picture: newUser.picture,
