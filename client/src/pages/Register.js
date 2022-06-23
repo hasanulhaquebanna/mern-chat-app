@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState("");
+  const [img, setImg] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = input;
+  //
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+  //
+  const handlePicture = (e) => {
+    let files = Array.from(e.target.files);
+    files.forEach((img) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onload = (readerEvent) => {
+        setFile((images) => [...images, readerEvent.target.result]);
+      };
+    });
+  };
+  //
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   //
   const googleAuth = () => {
     window.open(`${process.env.REACT_APP_SERVER}auth/google/callback`, "_self");
@@ -26,20 +55,68 @@ const Register = () => {
           </h2>
           <input
             type="text"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Username"
+            value={name}
+            name="name"
+            onChange={handleInput}
           />
           <input
-            type="text"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            type="email"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Email"
+            value={email}
+            name="email"
+            onChange={handleInput}
           />
           <input
             type="password"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Password"
+            value={password}
+            name="password"
+            onChange={handleInput}
           />
-          <button className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer">
+          <div className="w-[320px] h-[30px] p-[5px] my-[5px] mx-0 flex items-center border-[#dbdbdb] rounded-[5px] text-[13px] relative">
+            <label
+              htmlFor="file"
+              className="w-[135px] text-[#ffc801] font-semibold cursor-pointer"
+            >
+              Profile picture
+            </label>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              multiple={false}
+              accept="image/*"
+              className="cursor-pointer"
+              onChange={handlePicture}
+            />
+            {file && (
+              <div className="relative group">
+                <div className="w-[35px] h-[35px] absolute -right-[35px] -top-[18px] overflow-hidden rounded-full border border-[lavender]">
+                  <img
+                    src={file}
+                    alt="profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[260px] hidden group-hover:flex h-[260px] absolute -right-[35px] -top-[100px] overflow-hidden rounded-full border border-[lavender] z-10 shadow-2xl">
+                  <img
+                    src={file}
+                    alt="profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer"
+            onClick={handleSubmit}
+          >
             Sign Up
           </button>
           <p className="text-sm text-[#2c444e] m-[5px] mx-0 p-0">or</p>
