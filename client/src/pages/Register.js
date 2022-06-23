@@ -26,19 +26,35 @@ const Register = () => {
           </h2>
           <input
             type="text"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Username"
           />
           <input
             type="text"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Email"
           />
           <input
             type="password"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Password"
           />
+          <div className="w-[320px] h-[30px] p-[5px] my-[5px] mx-0 flex items-center border-[#dbdbdb] rounded-[5px] text-[13px] ">
+            <label
+              for="file"
+              className="w-[135px] text-[#ffc801] font-semibold cursor-pointer"
+            >
+              Profile picture
+            </label>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              multiple="false"
+              className="cursor-pointer"
+            />
+          </div>
+
           <button className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer">
             Sign Up
           </button>

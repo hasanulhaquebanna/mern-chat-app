@@ -26,12 +26,12 @@ const Login = ({ styles }) => {
           </h2>
           <input
             type="text"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Email"
           />
           <input
             type="password"
-            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#2c444e] rounded-[2px] text-[13px]"
+            className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Password"
           />
           <button className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer">
