@@ -11,28 +11,28 @@ module.exports = async (req, res) => {
         error: true,
         message: "Please fillup required credentials.",
       });
-      const useExist = await User.findOne({ email });
-      if (userExist) {
-        return res.status(404).json({
-          error: true,
-          message: "User already exists!",
-        });
-      }
-      const user = await new User.create({
-        name,
-        email,
-        password,
-        picture,
-      });
-      user.password = undefined;
-      user &&
-        res.status(200).json({
-          success: true,
-          message: "Successfully created a new user.",
-          ...user,
-          token: generateToken(user._id),
-        });
     }
+    const userExist = await User.findOne({ email });
+    if (userExist) {
+      return res.status(404).json({
+        error: true,
+        message: "User already exists!",
+      });
+    }
+    const user = await new User.create({
+      name,
+      email,
+      password,
+      picture,
+    });
+    user.password = undefined;
+    user &&
+      res.status(200).json({
+        success: true,
+        message: "Successfully created a new user.",
+        ...user,
+        token: generateToken(user._id),
+      });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

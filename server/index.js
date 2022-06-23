@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const bodyParser = require("body-parser");
 const { readdirSync } = require("fs");
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
+app.use(bodyParser.json());
+
 app.use(
   cookieSession({
     name: "session",
