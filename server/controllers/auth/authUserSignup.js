@@ -1,38 +1,45 @@
-const asyncHandler = require("express-async-handler");
+const { hashPassword } = require("../../helpers/bcrypt.js");
 const generateToken = require("../../helpers/generateToken.js");
 
 const User = require("../../models/users.js");
 
-module.exports = asyncHandler(async (req, res) => {
+module.exports = async (req, res) => {
   try {
     const { name, email, password, picture } = req.body;
-    console.log(name, email, password, picture);
     if (!name || !email || !password) {
-      res.status(404).json({
+      return res.status(404).json({
         error: true,
         message: "Please fillup required credentials.",
       });
-      const useExist = await User.findOne({ email });
-      if (userExist) {
-        res.status(404).json({
-          error: true,
-          message: "User already exists!",
-        });
-      }
-      const user = await User.create({
-        name,
-        email,
-        password,
-        picture,
-      });
-      user.password = undefined;
-      user &&
-        res.status(200).json({
-          success: true,
-          message: "Successfully created a new user.",
-          ...user,
-          token: generateToken(user._id),
-        });
     }
-  } catch (error) {}
-});
+    const serverEmail = email.toLowerCase();
+    const newPassword = await hashPassword(password);
+
+    const userExist = await User.findOne({ email: serverEmail });
+    if (userExist) {
+      return res.status(404).json({
+        error: true,
+        message: "User already exists!",
+      });
+    }
+    const newUser = await User.create({
+      name,
+      email: serverEmail,
+      password: newPassword,
+      picture,
+    });
+    //
+    newUser &&
+      res.status(200).json({
+        success: true,
+        message: "Successfully created a new user.",
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        picture: newUser.picture,
+        token: generateToken(newUser._id),
+      });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
