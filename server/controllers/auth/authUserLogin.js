@@ -1,30 +1,37 @@
+const { comparePassword } = require("../../helpers/bcrypt.js");
 const User = require("../../models/users.js");
 
 module.exports = async (req, res) => {
-  const { name, email, password, picture } = req.body;
+  const { email, password } = req.body;
   try {
-    if (!name || !email || !password) {
+    if (!email || !password) {
       res.status(404).json({
         error: true,
         message: "Please fillup required credentials.",
       });
-      const useExist = await User.findOne({ email });
-      if (userExist) {
+      const userExist = await User.findOne({ email });
+
+      if (!userExist) {
         res.status(404).json({
           error: true,
-          message: "User already exists!",
+          message: "There is no user associated with this email!",
         });
       }
-      const user = await User.create({
-        name,
-        email,
-        password,
-        picture,
-      });
-      user &&
+
+      const matchPassword = await comparePassword(userExist.password, password);
+
+      if (!matchPassword) {
+        res.status(404).json({
+          error: true,
+          message: "Password is wrong!",
+        });
+      }
+
+      matchPassword &&
+        userExist &&
         res.status(200).json({
           success: true,
-          message: "Successfully created a new user.",
+          message: "Successfully logged in.",
         });
     }
   } catch (error) {}
