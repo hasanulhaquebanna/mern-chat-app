@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
-      res.status(404).json({
+      return res.json({
         error: true,
         message: "Please fillup required credentials.",
       });
@@ -14,16 +14,16 @@ module.exports = async (req, res) => {
     const userExist = await User.findOne({ email });
 
     if (!userExist) {
-      res.status(404).json({
+      return res.json({
         error: true,
         message: "There is no user associated with this email!",
       });
     }
 
-    const matchPassword = comparePassword(password, userExist.password);
+    const matchPassword = await comparePassword(password, userExist.password);
 
     if (!matchPassword) {
-      res.status(404).json({
+      return res.json({
         error: true,
         message: "Password is wrong!",
       });

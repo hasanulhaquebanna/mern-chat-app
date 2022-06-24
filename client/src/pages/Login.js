@@ -1,7 +1,81 @@
-import React from "react";
+import { Button } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import axios from "axios";
 
-const Login = ({ styles }) => {
+const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = input;
+  //
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+  //
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (!email || !password) {
+        setLoading(false);
+        toast.error("Please fillup all the fields", {
+          position: "bottom-right",
+          autoClose: 1500,
+          pauseOnHover: true,
+        });
+      } else {
+        setTimeout(async () => {
+          const { data } = await axios.post(
+            `${process.env.REACT_APP_SERVER}auth/user/signin`,
+            {
+              email,
+              password,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          data && data.error && setLoading(false);
+          data &&
+            data.error &&
+            toast.error(data.message, {
+              position: "bottom-right",
+              autoClose: 1500,
+              pauseOnHover: true,
+            });
+
+          data && data.success && setLoading(false);
+          data &&
+            data.success &&
+            setInput({ ...input, email: "", password: "" });
+          data &&
+            data.success &&
+            setInput({ ...input, email: "", password: "" });
+          data &&
+            data.success &&
+            Swal.fire({
+              title: data.message,
+              icon: "success",
+            });
+        }, 1500);
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 1500,
+        pauseOnHover: true,
+      });
+    }
+  };
   //
   const googleAuth = () => {
     window.open(`${process.env.REACT_APP_SERVER}auth/google/callback`, "_self");
@@ -25,18 +99,30 @@ const Login = ({ styles }) => {
             Members Log in
           </h2>
           <input
-            type="text"
+            type="email"
             className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Email"
+            value={email}
+            name="email"
+            onChange={handleInput}
           />
           <input
             type="password"
             className="w-[320px] h-[35px] p-[5px] my-[5px] mx-0 outline-none border border-[#dbdbdb] rounded-[5px] text-[13px]"
             placeholder="Password"
+            value={password}
+            name="password"
+            onChange={handleInput}
           />
-          <button className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer">
-            Log In
-          </button>
+          <Button
+            className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer"
+            colorScheme="btn"
+            borderRadius="12px"
+            isLoading={loading}
+            onClick={handleSubmit}
+          >
+            Login
+          </Button>
           <p className="text-sm text-[#2c444e] m-[5px] mx-0 p-0">or</p>
           <button
             className="w-[230px] h-10 rounded-[5px] border-none outline-none bg-white shadow-googleBtn text-base font-medium mt-0 mr-0 mb-5 ml-0 text-[#2c444e] pointer flex items-center justify-center relative p-1"
