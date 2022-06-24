@@ -62,8 +62,10 @@ const Login = () => {
               title: data.message,
               icon: "success",
             });
-            localStorage.setItem("userinfo", JSON.stringify(data));
-            history.push("/");
+            setTimeout(() => {
+              localStorage.setItem("userinfo", JSON.stringify(data));
+              history.push("/");
+            }, 1000);
           }
         }, 1500);
       }
