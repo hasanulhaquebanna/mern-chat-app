@@ -1,11 +1,12 @@
 import { Button } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const Login = () => {
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState({
     email: "",
@@ -43,28 +44,29 @@ const Login = () => {
               },
             }
           );
-          data && data.error && setLoading(false);
-          data &&
-            data.error &&
+          // error
+          if (data && data.error) {
+            setLoading(false);
             toast.error(data.message, {
               position: "bottom-right",
               autoClose: 1500,
               pauseOnHover: true,
             });
+          }
 
-          data && data.success && setLoading(false);
-          data &&
-            data.success &&
+          // success
+          if (data && data.success) {
+            setLoading(false);
             setInput({ ...input, email: "", password: "" });
-          data &&
-            data.success &&
-            setInput({ ...input, email: "", password: "" });
-          data &&
-            data.success &&
             Swal.fire({
               title: data.message,
               icon: "success",
             });
+            setTimeout(() => {
+              localStorage.setItem("userinfo", JSON.stringify(data));
+              history.push("/");
+            }, 1000);
+          }
         }, 1500);
       }
     } catch (error) {
@@ -81,6 +83,11 @@ const Login = () => {
     window.open(`${process.env.REACT_APP_SERVER}auth/google/callback`, "_self");
   };
   //
+  useEffect(() => {
+    if (localStorage.getItem("userinfo")) {
+      history.push("/");
+    }
+  }, [history]);
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <h1 className="text-[40px] font-semibold text-[#2c444e] relative flex items-center justify-center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-[#2c444e] after:absolute">

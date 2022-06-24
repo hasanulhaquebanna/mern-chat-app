@@ -1,4 +1,4 @@
-import { Login, Register } from "pages";
+import { Home, Login, Register } from "pages";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
@@ -7,7 +7,7 @@ const App = () => {
     <div>
       <Switch>
         <Route path="/" exact>
-          <div></div>
+          <Home />
         </Route>
         <Route path="/login">
           <Login />
