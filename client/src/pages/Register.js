@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState("");
-  const [img, setImg] = useState("");
+  const [picture, setPicture] = useState("");
+  console.log(picture);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -27,6 +29,31 @@ const Register = () => {
       };
     });
   };
+  const handleImage = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "chat-app");
+      formData.append("cloud_name", "hasanulhaquebanna");
+      fetch("https://api.cloudinary.com/v1_1/hasanulhaquebanna/image/upload", {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPicture(data.url);
+          setLoading(false);
+          !loading &&
+            toast.success("Succesfully uploaded", {
+              position: "bottom-right",
+              autoClose: 1000,
+            });
+        })
+        .catch((err) => console.log(err));
+    }, 2000);
+  };
   //
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +64,7 @@ const Register = () => {
   };
   //
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="relative flex flex-col items-center justify-center w-full h-full">
       <h1 className="text-[40px] font-semibold text-[#2c444e] relative flex items-center justify-center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-[#2c444e] after:absolute">
         Sign up Form
       </h1>
@@ -99,19 +126,27 @@ const Register = () => {
                   <img
                     src={file}
                     alt="profile"
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                   />
                 </div>
                 <div className="w-[260px] hidden group-hover:flex h-[260px] absolute -right-[35px] -top-[100px] overflow-hidden rounded-full border border-[lavender] z-10 shadow-2xl">
                   <img
                     src={file}
                     alt="profile"
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>
             )}
           </div>
+          {file && (
+            <span
+              className="w-4/5 p-1 border border-[lavender] rounded-[8px] text-center shadow-googleBtn cursor-pointer"
+              onClick={handleImage}
+            >
+              Are sure with this profile pic?
+            </span>
+          )}
 
           <button
             className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer"
