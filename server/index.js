@@ -15,7 +15,7 @@ const passportSetup = require("./passport");
 // server middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "PUT", "DELETE", "UPDATE", "POST"],
     credentials: true,
     optionsSuccessStatus: 204,
