@@ -64,7 +64,7 @@ const Register = () => {
     try {
       if (!name || !email || !password || !picture) {
         setLoading(false);
-        toast.error("Please fill all the fields", {
+        toast.error("Please fillup all the fields", {
           position: "bottom-right",
           autoClose: 1000,
         });
