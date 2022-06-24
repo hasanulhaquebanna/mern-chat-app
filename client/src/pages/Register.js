@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const fileRef = useRef();
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState("");
   const [picture, setPicture] = useState("");
-  console.log(picture);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -20,14 +23,12 @@ const Register = () => {
   };
   //
   const handlePicture = (e) => {
-    let files = Array.from(e.target.files);
-    files.forEach((img) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onload = (readerEvent) => {
-        setFile((images) => [...images, readerEvent.target.result]);
-      };
-    });
+    let img = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.onload = (readerEvent) => {
+      setFile((image) => [...image, readerEvent.target.result]);
+    };
   };
   const handleImage = (e) => {
     e.preventDefault();
@@ -44,6 +45,8 @@ const Register = () => {
         .then((res) => res.json())
         .then((data) => {
           setPicture(data.url);
+          setFile("");
+          fileRef.current.value = "";
           setLoading(false);
           !loading &&
             toast.success("Succesfully uploaded", {
@@ -55,8 +58,51 @@ const Register = () => {
     }, 2000);
   };
   //
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    try {
+      if (!name || !email || !password || !picture) {
+        setLoading(false);
+        toast.error("Please fill all the fields", {
+          position: "bottom-right",
+          autoClose: 1000,
+        });
+      } else {
+        setTimeout(async () => {
+          const { data } = await axios.post(
+            `${process.env.REACT_APP_SERVER}/auth/user/signup`,
+            {
+              name,
+              email,
+              password,
+              picture,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          data && data.success && setLoading(false);
+          data &&
+            data.success &&
+            setInput({ ...input, name: "", email: "", password: "" });
+          data &&
+            data.success &&
+            Swal.fire({
+              title: data.message,
+              icon: "success",
+            });
+        }, 1500);
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
   };
   //
   const googleAuth = () => {
@@ -112,6 +158,7 @@ const Register = () => {
               Profile picture
             </label>
             <input
+              ref={fileRef}
               type="file"
               id="file"
               name="file"
@@ -141,19 +188,22 @@ const Register = () => {
           </div>
           {file && (
             <span
-              className="w-4/5 p-1 border border-[lavender] rounded-[8px] text-center shadow-googleBtn cursor-pointer"
+              className="w-4/5 p-1 border border-[lavender] rounded-[8px] text-center shadow-googleBtn cursor-pointer text-sm"
               onClick={handleImage}
             >
-              Are sure with this profile pic?
+              Click here to upload profile picture!
             </span>
           )}
 
-          <button
+          <Button
             className="text-lg font-medium py-3 px-[25px] text-white bg-[#ffc801] rounded-[12px] mt-[10px] mr-0 mb-0 ml-0 outline-none border-none cursor-pointer"
+            colorScheme="btn"
+            borderRadius="12px"
+            isLoading={loading}
             onClick={handleSubmit}
           >
             Sign Up
-          </button>
+          </Button>
           <p className="text-sm text-[#2c444e] m-[5px] mx-0 p-0">or</p>
           <button
             className="w-[230px] h-10 rounded-[5px] border-none outline-none bg-white shadow-googleBtn text-base font-medium mt-0 mr-0 mb-5 ml-0 text-[#2c444e] pointer flex items-center justify-center relative p-1"
