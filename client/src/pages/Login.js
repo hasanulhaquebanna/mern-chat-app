@@ -1,6 +1,9 @@
 import { Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +22,46 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-    } catch (error) {}
+      if (!email || !password) {
+        setLoading(false);
+        toast.error("Please fillup all the fields", {
+          position: "bottom-right",
+          autoClose: 1500,
+          pauseOnHover: true,
+        });
+      } else {
+        setTimeout(async () => {
+          const { data } = await axios.post(
+            `${process.env.REACT_APP_SERVER}/auth/user/signin`,
+            {
+              email,
+              password,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          data && data.success && setLoading(false);
+          data &&
+            data.success &&
+            setInput({ ...input, email: "", password: "" });
+          data &&
+            data.success &&
+            Swal.fire({
+              title: data.message,
+              icon: "success",
+            });
+        }, 1500);
+      }
+    } catch (error) {
+      setLoading(false);
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+      });
+    }
   };
   //
   const googleAuth = () => {

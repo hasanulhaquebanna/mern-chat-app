@@ -21,7 +21,7 @@ router.get("/auth/logout", (req, res) => {
   res.redirect(CLIENTURL);
 });
 // rest api routes
-router.post("/auth/user/login", authUserLogin);
+router.post("/auth/user/signin", authUserLogin);
 router.post("/auth/user/signup", authUserSignup);
 
 module.exports = router;

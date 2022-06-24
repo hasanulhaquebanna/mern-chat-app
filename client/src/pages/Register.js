@@ -50,7 +50,7 @@ const Register = () => {
           setLoading(false);
           !loading &&
             toast.success(
-              "Succesfully uploaded! You can create your account now.",
+              "Succesfully uploaded! You can create your account by clicking signup.",
               {
                 position: "bottom-right",
                 autoClose: 1500,

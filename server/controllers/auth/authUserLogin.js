@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    const matchPassword = comparePassword(password, userExist.password);
+    const matchPassword = await comparePassword(password, userExist.password);
 
     if (!matchPassword) {
       res.status(404).json({
