@@ -89,6 +89,15 @@ const Register = () => {
               },
             }
           );
+          data && data.error && setLoading(false);
+          data &&
+            data.error &&
+            toast.error(data.message, {
+              position: "bottom-right",
+              autoClose: 1500,
+              pauseOnHover: true,
+            });
+
           data && data.success && setLoading(false);
           data &&
             data.success &&
@@ -103,9 +112,10 @@ const Register = () => {
       }
     } catch (error) {
       setLoading(false);
-      Swal.fire({
-        title: error.message,
-        icon: "error",
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 1500,
+        pauseOnHover: true,
       });
     }
   };

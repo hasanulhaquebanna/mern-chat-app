@@ -32,7 +32,7 @@ const Login = () => {
       } else {
         setTimeout(async () => {
           const { data } = await axios.post(
-            `${process.env.REACT_APP_SERVER}/auth/user/signin`,
+            `${process.env.REACT_APP_SERVER}auth/user/signin`,
             {
               email,
               password,
@@ -43,7 +43,19 @@ const Login = () => {
               },
             }
           );
+          data && data.error && setLoading(false);
+          data &&
+            data.error &&
+            toast.error(data.message, {
+              position: "bottom-right",
+              autoClose: 1500,
+              pauseOnHover: true,
+            });
+
           data && data.success && setLoading(false);
+          data &&
+            data.success &&
+            setInput({ ...input, email: "", password: "" });
           data &&
             data.success &&
             setInput({ ...input, email: "", password: "" });
@@ -57,9 +69,10 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-      Swal.fire({
-        title: error.message,
-        icon: "error",
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 1500,
+        pauseOnHover: true,
       });
     }
   };
