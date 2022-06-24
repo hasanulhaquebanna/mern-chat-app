@@ -32,7 +32,8 @@ module.exports = async (req, res) => {
     newUser &&
       res.status(200).json({
         success: true,
-        message: "Successfully created a new user.",
+        message:
+          "Congratulations! Your account created successfully. Please Login.",
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,

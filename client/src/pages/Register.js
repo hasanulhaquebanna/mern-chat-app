@@ -49,10 +49,14 @@ const Register = () => {
           fileRef.current.value = "";
           setLoading(false);
           !loading &&
-            toast.success("Succesfully uploaded", {
-              position: "bottom-right",
-              autoClose: 1000,
-            });
+            toast.success(
+              "Succesfully uploaded! You can create your account now.",
+              {
+                position: "bottom-right",
+                autoClose: 1500,
+                pauseOnHover: true,
+              }
+            );
         })
         .catch((err) => console.log(err));
     }, 2000);
@@ -66,7 +70,8 @@ const Register = () => {
         setLoading(false);
         toast.error("Please fillup all the fields", {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 1500,
+          pauseOnHover: true,
         });
       } else {
         setTimeout(async () => {
