@@ -8,6 +8,7 @@ import App from "./App";
 import "./index.css";
 
 import { extendTheme } from "@chakra-ui/react";
+import ChatProvider from "context/ChatContext";
 
 const theme = extendTheme({
   colors: {
@@ -19,12 +20,12 @@ const theme = extendTheme({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <ChatProvider>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <App />
         <ToastContainer />
       </BrowserRouter>
     </ChakraProvider>
-  </React.StrictMode>
+  </ChatProvider>
 );
