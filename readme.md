@@ -13,7 +13,7 @@ Includeds:
 7. Socket.io/client
 8. and many more libraries
 
-## [Live url](https://kothabarta.vercel.app/)
+## [Client Live url](https://kothabarta.vercel.app/)
 
 ## Backend
 
