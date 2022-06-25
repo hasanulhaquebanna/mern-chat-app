@@ -14,6 +14,6 @@ router.get("/chats", userAuthorization, getAllChats);
 router.post("/group/creategroup", userAuthorization, createGroup);
 router.put("/group/renamegroup", userAuthorization, renameGroup);
 router.put("/group/addtogroup", userAuthorization, addToGroup);
-router.post("/group/removefromgroup", userAuthorization, removeFromGroup);
+router.put("/group/removefromgroup", userAuthorization, removeFromGroup);
 
 module.exports = router;
