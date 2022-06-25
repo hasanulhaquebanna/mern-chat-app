@@ -63,7 +63,7 @@ const Login = () => {
               icon: "success",
             });
             setTimeout(() => {
-              localStorage.setItem("userinfo", JSON.stringify(data));
+              localStorage.setItem("userInfo", JSON.stringify(data));
               history.push("/");
             }, 1000);
           }
@@ -84,7 +84,7 @@ const Login = () => {
   };
   //
   useEffect(() => {
-    if (localStorage.getItem("userinfo")) {
+    if (localStorage.getItem("userInfo")) {
       history.push("/");
     }
   }, [history]);
