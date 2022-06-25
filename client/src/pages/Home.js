@@ -7,6 +7,11 @@ const Home = () => {
   const { user } = ChatState();
   console.log(user);
   //
+  useEffect(() => {
+    if (!localStorage.getItem("userInfo")) {
+      history.push("/login");
+    }
+  }, [history]);
 
   return <div>Home</div>;
 };
