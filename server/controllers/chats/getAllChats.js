@@ -9,7 +9,8 @@ module.exports = expressAsyncHandler(async (req, res) => {
     })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
-      .populate("latestMessage");
+      .populate("latestMessage")
+      .sort({ updateAt: -1 });
 
     if (chats) {
       const allchats = await User.populate(chats, {
