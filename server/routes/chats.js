@@ -8,7 +8,7 @@ const createGroup = require("../controllers/chats/createGroup");
 
 router.post("/chats", userAuthorization, createChat);
 router.get("/chats", userAuthorization, getAllChats);
-router.post("/group/creategroup", createGroup);
+router.post("/group/creategroup", userAuthorization, createGroup);
 // router.post('/group/getgroups',getGroups)
 // router.post('/group/remove',removeGroup)
 // router.post('/group/rename',renameGroup)
