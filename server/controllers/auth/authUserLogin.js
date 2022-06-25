@@ -1,8 +1,10 @@
+const asynHandler = require("express-async-handler");
+
 const { comparePassword } = require("../../helpers/bcrypt.js");
 const generateToken = require("../../helpers/generateToken.js");
 const User = require("../../models/users.js");
 
-module.exports = async (req, res) => {
+module.exports = asynHandler(async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email || !password) {
@@ -43,4 +45,4 @@ module.exports = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-};
+});
