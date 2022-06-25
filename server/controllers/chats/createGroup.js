@@ -32,6 +32,7 @@ module.exports = expressAsyncHandler(async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Group created successfully",
+      group,
     });
   } catch (error) {
     res.status(500);
