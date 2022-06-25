@@ -13,6 +13,8 @@ Includeds:
 7. Socket.io/client
 8. and many more libraries
 
+## [Client Live url](https://kothabarta.vercel.app/)
+
 ## Backend
 
 1. Express.js
