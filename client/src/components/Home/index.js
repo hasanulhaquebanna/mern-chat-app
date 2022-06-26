@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/react";
 //
 import Sidebar from "components/Sidebar";

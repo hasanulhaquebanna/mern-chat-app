@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import MenuCard from "./MenuCard";
 
-const RecentChats = ({ favourites }) => {
+const RecentChats = ({ favourites, chats }) => {
   return (
     <Box className="pt-8">
       {favourites && (
@@ -17,15 +17,9 @@ const RecentChats = ({ favourites }) => {
         </Text>
       )}
       <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
+        {chats?.map((data, index) => (
+          <MenuCard />
+        ))}
       </Box>
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Avatar, Box } from "@chakra-ui/react";
 
 const UserAvatar = ({ user }) => {

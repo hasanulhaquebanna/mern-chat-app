@@ -1,10 +1,91 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
-import MenuCard from "./MenuCard";
 import Favourite from "./Favourite";
 import RecentChats from "./RecentChats";
 
-const ChatMenu = ({ favourites, recentChats = true, user }) => {
+const ChatMenu = ({ user }) => {
+  const favourites = [
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+  ];
+  const recentChats = [
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+    {
+      id: 1,
+      user: "Banna",
+    },
+
+    {
+      id: 2,
+      user: "Banna",
+    },
+    {
+      id: 3,
+      user: "Banna",
+    },
+  ];
   return (
     <Box
       marginLeft="80px"
@@ -21,8 +102,12 @@ const ChatMenu = ({ favourites, recentChats = true, user }) => {
         >
           Recent Chats
         </Text>
-        {favourites && <Favourite recentChats={recentChats} />}
-        {recentChats && <RecentChats favourites={favourites} />}
+        {favourites && (
+          <Favourite chats={favourites} recentChats={recentChats} />
+        )}
+        {recentChats && (
+          <RecentChats chats={recentChats} favourites={favourites} />
+        )}
       </Box>
     </Box>
   );
