@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import MenuCard from "./MenuCard";
+import Favourite from "./Favourite";
+import RecentChats from "./RecentChats";
 
-const ChatMenu = ({ favourite, recentChats, user }) => {
+const ChatMenu = ({ favourites = true, recentChats = true, user }) => {
   return (
     <Box
       marginLeft="80px"
@@ -12,16 +14,15 @@ const ChatMenu = ({ favourite, recentChats, user }) => {
       border="1px solid rgba( 255, 255, 255, 0.18 )"
       className=" w-[320px] h-screen"
     >
-      <Box>
+      <Box display="flex" flexDirection="column">
         <Text
           textShadow="2px -2px 4px #ffc801"
           className="text-[cadetblue] text-center font-bold text-3xl"
         >
           Recent Chats
         </Text>
-        {favourites && <Favourite></Favourite>}
-        {/* {recentChats && <RecentChats />} */}
-        <MenuCard user={user} />
+        {favourites && <Favourite />}
+        {recentChats && <RecentChats />}
       </Box>
     </Box>
   );

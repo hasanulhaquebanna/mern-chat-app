@@ -12,6 +12,7 @@ const MenuCard = ({ user }) => {
       borderRadius="3px"
       className="flex items-center text-lg py-2.5 px-[18px]"
       cursor="pointer"
+      marginBottom="5px"
     >
       <Avatar
         width="30px"
