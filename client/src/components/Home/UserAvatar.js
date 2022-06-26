@@ -7,10 +7,9 @@ const UserAvatar = () => {
   useEffect(() => {
     const userInfo = JSON.parse(localStorage?.getItem("userInfo"));
     setUser(userInfo);
-    console.log(user);
   }, []);
   return (
-    <Box className="flex items-center justify-center">
+    <Box className="flex items-center justify-center cursor-pointer">
       <Avatar
         width="30px"
         height="30px"
