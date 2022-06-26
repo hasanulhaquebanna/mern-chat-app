@@ -1,8 +1,8 @@
-import React from "react";
+import { Image as Img } from "@chakra-ui/react";
 
 const Image = ({ src, alt }) => {
   return (
-    <img
+    <Img
       src={src && src}
       alt={alt && alt}
       className="object-cover w-full h-full"

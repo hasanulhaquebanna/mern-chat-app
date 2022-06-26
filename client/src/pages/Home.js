@@ -1,19 +1,19 @@
 import { Box } from "@chakra-ui/react";
-import { SideDrawer } from "components";
+import { Home } from "components";
 import { ChatState } from "context/ChatContext";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const Home = () => {
+const Main = () => {
   const history = useHistory();
   const { user } = ChatState();
   //
   return (
     <Box>
       {/* sidebar drawer */}
-      <SideDrawer />
+      <Home />
     </Box>
   );
 };
 
-export default Home;
+export default Main;

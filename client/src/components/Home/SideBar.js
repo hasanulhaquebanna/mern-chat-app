@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Logo from "./Logo";
+import SideBarMenu from "./SideBarMenu";
 
 const SideDrawer = () => {
   return (
@@ -16,6 +17,7 @@ const SideDrawer = () => {
     >
       <Logo />
       {/* SideDrawerMenu */}
+      <SideBarMenu />
       {/*ProfileIcon  */}
     </Box>
   );
