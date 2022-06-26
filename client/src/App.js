@@ -9,12 +9,8 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
+        <Route path="/login">{/* <Login /> */}</Route>
+        <Route path="/register">{/* <Register /> */}</Route>
       </Switch>
     </div>
   );
