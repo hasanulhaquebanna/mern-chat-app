@@ -38,7 +38,7 @@ const SideBarMenu = () => {
           to="#"
           className={classNames(
             "w-[80px] block",
-            url === "/" && "border-r-[3px] border-white"
+            url === "/" && "border-r-[3px] border-primaryYellow"
           )}
         >
           <Box
