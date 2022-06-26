@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Box } from "@chakra-ui/react";
 
-const UserAvatar = () => {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage?.getItem("userInfo"));
-    setUser(userInfo);
-  }, []);
+const UserAvatar = ({ user }) => {
   return (
     <Box className="flex items-center justify-center cursor-pointer">
       <Avatar

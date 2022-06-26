@@ -1,10 +1,11 @@
+import { Box } from "@chakra-ui/react";
 import { Home, Login, Register } from "pages";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
+    <Box backgroundColor="blue.100">
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -16,7 +17,7 @@ const App = () => {
           <Register />
         </Route>
       </Switch>
-    </div>
+    </Box>
   );
 };
 

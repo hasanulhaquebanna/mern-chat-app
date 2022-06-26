@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import SideBarMenu from "./SideBarMenu";
 import UserAvatar from "./UserAvatar";
 
-const Sidebar = () => {
+const Sidebar = ({ user }) => {
   return (
     <Box
       width="80px"
@@ -21,7 +21,7 @@ const Sidebar = () => {
       {/* SidebarMenu */}
       <SideBarMenu />
       {/*ProfileIcon  */}
-      <UserAvatar />
+      <UserAvatar user={user} />
     </Box>
   );
 };
