@@ -1,11 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import SideBar from "./SideBar";
+import Sidebar from "components/Sidebar";
+import ChatMenu from "components/ChatMenu";
 
 const Home = () => {
   return (
-    <Box>
-      <SideBar />
+    <Box display="flex">
+      <Sidebar />
+      {/* chat menu */}
+      <ChatMenu />
     </Box>
   );
 };

@@ -1,10 +1,11 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
+import { Box } from "@chakra-ui/react";
+
 import Logo from "./Logo";
 import SideBarMenu from "./SideBarMenu";
 import UserAvatar from "./UserAvatar";
 
-const SideDrawer = () => {
+const Sidebar = () => {
   return (
     <Box
       width="80px"
@@ -14,10 +15,10 @@ const SideDrawer = () => {
       top={0}
       height="100vh"
       overflow="hidden"
-      className="bg-teal-600 p-4 flex flex-col"
+      className="flex flex-col p-4 bg-teal-600"
     >
       <Logo />
-      {/* SideDrawerMenu */}
+      {/* SidebarMenu */}
       <SideBarMenu />
       {/*ProfileIcon  */}
       <UserAvatar />
@@ -25,4 +26,4 @@ const SideDrawer = () => {
   );
 };
 
-export default SideDrawer;
+export default Sidebar;
