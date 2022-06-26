@@ -9,7 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import MenuCard from "./MenuCard";
+import UserMenuCard from "helpers/UserMenuCard";
 
 const GroupModal = ({ isOpen, onClose, user = true }) => {
   return (
@@ -21,11 +21,9 @@ const GroupModal = ({ isOpen, onClose, user = true }) => {
         <ModalBody>
           <Input placeholder="Search user" />
           {user && (
-            <>
-              <Box marginY="10px">
-                <MenuCard groupModal={true} />
-              </Box>
-            </>
+            <Box marginY="10px">
+              <UserMenuCard groupModal={true} />
+            </Box>
           )}
         </ModalBody>
       </ModalContent>

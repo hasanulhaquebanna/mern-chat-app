@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
-import MenuCard from "./MenuCard";
+import UserMenuCard from "helpers/UserMenuCard";
 
 const RecentChats = ({ favourites, chats }) => {
   return (
@@ -18,7 +18,7 @@ const RecentChats = ({ favourites, chats }) => {
       )}
       <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
         {chats?.map((data, index) => (
-          <MenuCard />
+          <UserMenuCard />
         ))}
       </Box>
     </Box>

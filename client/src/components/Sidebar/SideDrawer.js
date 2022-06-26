@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -9,7 +10,9 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-const SideDrawer = ({ isOpen, onClose, btnRef }) => {
+import UserMenuCard from "helpers/UserMenuCard";
+
+const SideDrawer = ({ isOpen, onClose, btnRef, user = true }) => {
   return (
     <Drawer
       isOpen={isOpen}
@@ -23,6 +26,11 @@ const SideDrawer = ({ isOpen, onClose, btnRef }) => {
         <DrawerHeader>Search</DrawerHeader>
         <DrawerBody>
           <Input placeholder="Type here..." />
+          {user && (
+            <Box marginY="10px">
+              <UserMenuCard groupModal={true} />
+            </Box>
+          )}
         </DrawerBody>
       </DrawerContent>
     </Drawer>
