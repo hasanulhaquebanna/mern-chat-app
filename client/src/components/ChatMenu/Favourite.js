@@ -1,10 +1,16 @@
 import { Box, Text } from "@chakra-ui/react";
+import classNames from "classnames";
 import React from "react";
 import MenuCard from "./MenuCard";
 
-const Favourite = () => {
+const Favourite = ({ recentChats }) => {
   return (
-    <Box className="pt-8">
+    <Box
+      className={classNames(
+        "pt-8 overflow-hidden",
+        recentChats && "max-h-[292px] "
+      )}
+    >
       <Text
         textDecoration="underline"
         fontSize="18px"
@@ -14,7 +20,15 @@ const Favourite = () => {
       >
         #Favourites
       </Text>
-      <MenuCard />
+      <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+      </Box>
     </Box>
   );
 };
