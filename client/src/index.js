@@ -12,8 +12,8 @@ import ChatProvider from "context/ChatContext";
 
 const theme = extendTheme({
   colors: {
-    brand: {
-      btn: "#ffc801",
+    btnPrimary: {
+      100: "#ffc801",
     },
   },
 });

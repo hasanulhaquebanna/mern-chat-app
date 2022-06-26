@@ -8,6 +8,11 @@ const Main = () => {
   const history = useHistory();
   const { user } = ChatState();
   //
+  useEffect(() => {
+    if (!localStorage?.getItem("userInfo")) {
+      history.push("/login");
+    }
+  }, []);
   return (
     <Box>
       {/* sidebar drawer */}
