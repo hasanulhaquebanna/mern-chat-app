@@ -1,15 +1,24 @@
+import { Box } from "@chakra-ui/react";
+import { Home } from "components";
+import { ChatState } from "context/ChatContext";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const Home = () => {
+const Main = () => {
   const history = useHistory();
+  const { user } = ChatState();
   //
   useEffect(() => {
-    if (!localStorage.getItem("userinfo")) {
+    if (!localStorage?.getItem("userInfo")) {
       history.push("/login");
     }
-  }, [history]);
-  return <div>Home</div>;
+  }, []);
+  return (
+    <Box>
+      {/* sidebar drawer */}
+      <Home />
+    </Box>
+  );
 };
 
-export default Home;
+export default Main;

@@ -59,13 +59,14 @@ const Login = () => {
             setLoading(false);
             setInput({ ...input, email: "", password: "" });
             Swal.fire({
-              title: data.message,
+              title: `${data.message} You will be redirected to the main page`,
               icon: "success",
+              timer: 1200,
             });
             setTimeout(() => {
-              localStorage.setItem("userinfo", JSON.stringify(data));
+              localStorage.setItem("userInfo", JSON.stringify(data));
               history.push("/");
-            }, 1000);
+            }, 1500);
           }
         }, 1500);
       }
@@ -84,7 +85,7 @@ const Login = () => {
   };
   //
   useEffect(() => {
-    if (localStorage.getItem("userinfo")) {
+    if (localStorage.getItem("userInfo")) {
       history.push("/");
     }
   }, [history]);
