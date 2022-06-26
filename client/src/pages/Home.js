@@ -11,9 +11,9 @@ const Home = () => {
     if (!localStorage.getItem("userInfo")) {
       history.push("/login");
     }
-  }, [history]);
+  }, [history, user]);
 
-  return <div>Home</div>;
+  return <div>{user?.id}</div>;
 };
 
 export default Home;
