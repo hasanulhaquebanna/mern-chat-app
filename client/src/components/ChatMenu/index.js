@@ -6,37 +6,38 @@ import GroupModal from "./GroupModal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { ChatState } from "context/ChatContext";
 
-const ChatMenu = () => {
+const ChatMenu = ({ user }) => {
+  console.log(user);
   let history = useHistory();
-  let [user, setUser] = useState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
-  let [favourites, setFavoutes] = useState([]);
-
-  const getAllChats = async () => {
-    try {
-      const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-        },
-      });
-      setRecentChats(data);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  let [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("userInfo"))) {
-      history.pushState("/login");
-    } else {
-      setUser(JSON.parse(localStorage.getItem("userInfo")));
-    }
-
-    getAllChats();
-    console.log(user);
+    setTimeout(async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER}/chats`,
+          {
+            headers: {
+              Authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("userInfo")).token
+              }`,
+            },
+          }
+        );
+        data && setRecentChats(data);
+        console.log(data);
+      } catch (error) {
+        toast.error(error.message, {
+          autoClose: 1500,
+        });
+      }
+    }, 2000);
   }, []);
+
   return (
     <Box
       marginLeft="80px"
