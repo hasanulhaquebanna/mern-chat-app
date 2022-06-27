@@ -21,8 +21,16 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");
+  let clear = () => {
+    setResults([]);
+    setSearch("");
+  };
   let handleSearchUser = async () => {
     setLoading(true);
+    if (!search) {
+      setLoading(false);
+      return false;
+    }
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
@@ -50,7 +58,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
     >
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton />
+        <DrawerCloseButton onClick={clear} />
         <DrawerHeader>Search</DrawerHeader>
         <DrawerBody overflowX="hidden" overflowY="autho">
           <Box position="relative" display="flex" gap="5px">

@@ -6,9 +6,12 @@ const ChatContext = createContext();
 const ChatProvider = ({ children }) => {
   const [user, setUser] = useState("");
 
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const getUser = async () => {
+    const userInfo = await JSON.parse(localStorage.getItem("userInfo"));
     setUser(userInfo);
+  };
+  useEffect(() => {
+    getUser();
   }, []);
   return (
     <ChatContext.Provider value={{ user, setUser }}>

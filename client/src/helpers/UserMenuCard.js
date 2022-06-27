@@ -6,7 +6,7 @@ const MenuCard = ({ item, groupModal }) => {
   console.log(item);
   return (
     <Box
-      _hover={{ background: "rgba( 255, 255, 255, 0.3 )" }}
+      _hover={{ background: "#059669", color: "white" }}
       boxShadow="-5px 5px 50px 0 rgb(115 119 179 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"

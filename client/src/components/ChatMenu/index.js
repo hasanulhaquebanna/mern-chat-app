@@ -118,7 +118,7 @@ const ChatMenu = ({ user }) => {
           icon={<GrAddCircle />}
           onClick={onOpen}
         />
-        <GroupModal isOpen={isOpen} onClose={onClose} />
+        <GroupModal isOpen={isOpen} onClose={onClose} user={user} />
         {favourites && (
           <Favourite chats={favourites} recentChats={recentChats} />
         )}

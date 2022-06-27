@@ -3,7 +3,7 @@ import React from "react";
 
 const ModalLoading = () => {
   return (
-    <Stack>
+    <Stack marginTop="20px">
       <Skeleton height="40px" />
       <Skeleton height="40px" />
       <Skeleton height="40px" />
