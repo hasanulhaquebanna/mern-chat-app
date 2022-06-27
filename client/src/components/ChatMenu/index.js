@@ -1,94 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, IconButton, Text, useDisclosure } from "@chakra-ui/react";
 import { GrAddCircle } from "react-icons/gr";
-import Favourite from "./Favourite";
 import RecentChats from "./RecentChats";
 import GroupModal from "./GroupModal";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
-const ChatMenu = ({ user }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const favourites = [
-    {
-      id: 1,
-      user: "Banna",
-    },
+const ChatMenu = () => {
+  let history = useHistory();
+  let [user, setUser] = useState();
+  let { isOpen, onOpen, onClose } = useDisclosure();
+  let [recentChats, setRecentChats] = useState([]);
+  let [favourites, setFavoutes] = useState([]);
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
+  const getAllChats = async () => {
+    try {
+      const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      });
+      setRecentChats(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("userInfo"))) {
+      history.pushState("/login");
+    } else {
+      setUser(JSON.parse(localStorage.getItem("userInfo")));
+    }
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-  ];
-  const recentChats = [
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-  ];
+    getAllChats();
+    console.log(user);
+  }, []);
   return (
     <Box
       marginLeft="80px"
@@ -96,7 +44,8 @@ const ChatMenu = ({ user }) => {
       boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
-      className=" w-[320px] h-screen"
+      className=" w-[20%] h-screen"
+      minHeight="100vh"
     >
       <Box display="flex" flexDirection="column" className="relative">
         <Text
@@ -119,9 +68,6 @@ const ChatMenu = ({ user }) => {
           onClick={onOpen}
         />
         <GroupModal isOpen={isOpen} onClose={onClose} user={user} />
-        {favourites && (
-          <Favourite chats={favourites} recentChats={recentChats} />
-        )}
         {recentChats && (
           <RecentChats chats={recentChats} favourites={favourites} />
         )}

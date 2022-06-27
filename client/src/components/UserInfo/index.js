@@ -1,10 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import { ChatState } from "context/ChatContext";
 import React from "react";
-import ChatHeader from "./ChatHeader";
 
-const Chat = () => {
-  let { chats, setChats } = ChatState();
+const UserInfo = () => {
   return (
     <Box
       marginLeft="0px"
@@ -12,11 +9,11 @@ const Chat = () => {
       boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
-      className=" w-[50%] h-screen ml-[5px] "
+      className=" w-[28%] h-screen"
     >
-      <ChatHeader />
+      HELLOW WORLD{" "}
     </Box>
   );
 };
 
-export default Chat;
+export default UserInfo;

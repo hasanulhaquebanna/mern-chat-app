@@ -1,6 +1,7 @@
 import Home from "./Home";
 import Chat from "./Chat";
-import Sidebar from "components/Sidebar";
-import ChatMenu from "components/ChatMenu";
+import Sidebar from "./Sidebar";
+import ChatMenu from "./ChatMenu";
+import UserInfo from "./UserInfo";
 
-export { Home, Chat, Sidebar, ChatMenu };
+export { Home, Chat, Sidebar, ChatMenu, UserInfo };

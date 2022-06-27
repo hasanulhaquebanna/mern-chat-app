@@ -3,9 +3,10 @@ import React from "react";
 import UserMenuCard from "helpers/UserMenuCard";
 
 const RecentChats = ({ favourites, chats }) => {
+  let startChat = (userId) => {};
   return (
     <Box className="pt-8">
-      {favourites && (
+      {!favourites && (
         <Text
           textDecoration="underline"
           fontSize="18px"
@@ -18,7 +19,11 @@ const RecentChats = ({ favourites, chats }) => {
       )}
       <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
         {chats?.map((data, index) => (
-          <UserMenuCard />
+          <UserMenuCard
+            key={index}
+            item={data}
+            handleChat={() => startChat(data?._id)}
+          />
         ))}
       </Box>
     </Box>

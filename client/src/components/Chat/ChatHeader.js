@@ -1,22 +1,22 @@
 import { Box } from "@chakra-ui/react";
-import { ChatState } from "context/ChatContext";
 import React from "react";
-import ChatHeader from "./ChatHeader";
 
-const Chat = () => {
-  let { chats, setChats } = ChatState();
+const ChatHeader = () => {
   return (
     <Box
-      marginLeft="0px"
+      position="absolute"
+      top="0"
+      left="0"
+      width="100%"
+      height="70px"
       background="rgba( 255, 255, 255, 0.22 )"
       boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
-      className=" w-[50%] h-screen ml-[5px] "
     >
-      <ChatHeader />
+      Header
     </Box>
   );
 };
 
-export default Chat;
+export default ChatHeader;

@@ -10,7 +10,7 @@ const Sidebar = ({ user }) => {
     <Box
       width="80px"
       minHeight="100vh"
-      position="fixed"
+      position="absolute"
       left={0}
       top={0}
       height="100vh"

@@ -10,8 +10,6 @@ const ModalLoading = () => {
       <Skeleton height="40px" />
       <Skeleton height="40px" />
       <Skeleton height="40px" />
-      <Skeleton height="40px" />
-      <Skeleton height="40px" />
     </Stack>
   );
 };

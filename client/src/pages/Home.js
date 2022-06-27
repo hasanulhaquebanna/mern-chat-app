@@ -15,7 +15,7 @@ const Main = () => {
     }
   }, [history, setUser]);
   return (
-    <Box>
+    <Box className="flex">
       {/* sidebar drawer */}
       <Home user={user} />
     </Box>
