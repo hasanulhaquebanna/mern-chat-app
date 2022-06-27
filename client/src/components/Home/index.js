@@ -1,8 +1,8 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 //
-import Sidebar from "components/Sidebar";
-import ChatMenu from "components/ChatMenu";
+
+import { Chat, Sidebar, ChatMenu } from "components";
 
 const Home = ({ user }) => {
   return (
@@ -10,6 +10,7 @@ const Home = ({ user }) => {
       <Sidebar user={user} />
       {/* chat menu */}
       <ChatMenu user={user} />
+      <Chat />
     </Box>
   );
 };

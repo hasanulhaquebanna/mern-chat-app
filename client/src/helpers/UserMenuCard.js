@@ -2,8 +2,7 @@ import React from "react";
 import { Avatar, Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
 
-const MenuCard = ({ item, groupModal }) => {
-  console.log(item);
+const UserMenuCard = ({ item, groupModal, handleChat }) => {
   return (
     <Box
       _hover={{ background: "#059669", color: "white" }}
@@ -18,6 +17,7 @@ const MenuCard = ({ item, groupModal }) => {
         "flex items-center text-lg py-2.5 px-[18px]",
         groupModal && "!rounded-[8px]"
       )}
+      onClick={handleChat}
     >
       <Avatar
         width="30px"
@@ -31,4 +31,4 @@ const MenuCard = ({ item, groupModal }) => {
   );
 };
 
-export default MenuCard;
+export default UserMenuCard;

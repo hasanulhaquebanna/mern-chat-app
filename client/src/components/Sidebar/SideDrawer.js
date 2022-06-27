@@ -16,12 +16,14 @@ import UserMenuCard from "helpers/UserMenuCard";
 import { toast } from "react-toastify";
 import axios from "axios";
 import ModalLoading from "helpers/ModalLoading";
+import { ChatState } from "context/ChatContext";
 
-const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
+const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
+  let { setSelectedChat } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");
-  let clear = () => {
+  let clearInpu = () => {
     setResults([]);
     setSearch("");
   };
@@ -49,6 +51,27 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
       toast.error(error.message);
     }
   };
+  let createChat = async (userId) => {
+    try {
+      let { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER}/chats`,
+        { userId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
+      data && setSelectedChat(data);
+      onClose();
+    } catch (error) {
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+    }
+  };
   return (
     <Drawer
       isOpen={isOpen}
@@ -58,7 +81,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
     >
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton onClick={clear} />
+        <DrawerCloseButton onClick={clearInpu} />
         <DrawerHeader>Search</DrawerHeader>
         <DrawerBody overflowX="hidden" overflowY="autho">
           <Box position="relative" display="flex" gap="5px">
@@ -79,7 +102,12 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
           ) : (
             results?.map((item, index) => (
               <Box marginY="10px" key={index}>
-                <UserMenuCard item={item} groupModal={true} />
+                <UserMenuCard
+                  item={item}
+                  groupModal={true}
+                  handleChat={() => createChat(item?._id)}
+                  currentUser={user}
+                />
               </Box>
             ))
           )}
