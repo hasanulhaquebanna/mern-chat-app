@@ -14,7 +14,7 @@ import {
 
 import UserMenuCard from "helpers/UserMenuCard";
 
-const SideDrawer = ({ isOpen, onClose, btnRef, user = true }) => {
+const SideDrawer = ({ isOpen, onClose, btnRef, user = true, notification }) => {
   return (
     <Drawer
       isOpen={isOpen}
