@@ -1,9 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
 import React from "react";
-import MenuCard from "./MenuCard";
+import UserMenuCard from "../../helpers/UserMenuCard";
 
-const Favourite = ({ recentChats }) => {
+const Favourite = ({ recentChats, chats }) => {
   return (
     <Box
       className={classNames(
@@ -20,14 +20,10 @@ const Favourite = ({ recentChats }) => {
       >
         #Favourites
       </Text>
-      <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
+      <Box className="flex flex-col min-h-[200px] overflow-y-auto  max-h-[500px]">
+        {chats?.map((data, index) => (
+          <UserMenuCard />
+        ))}
       </Box>
     </Box>
   );

@@ -131,7 +131,7 @@ const Register = () => {
     }
   }, [history]);
   return (
-    <div className="relative flex flex-col items-center justify-center w-full h-full">
+    <div className="relative flex flex-col items-center justify-center w-full h-screen">
       <h1 className="text-[40px] font-semibold text-primaryGray relative flex items-center justify-center after:content-[''] after:w-[400px] after:h-1 after:rounded-[1px] after:-bottom-5 after:bg-primaryGray after:absolute">
         Sign up Form
       </h1>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Avatar, Box, Text } from "@chakra-ui/react";
+import classNames from "classnames";
 
-const MenuCard = ({ user }) => {
+const MenuCard = ({ user, groupModal }) => {
   return (
     <Box
       _hover={{ background: "rgba( 255, 255, 255, 0.3 )" }}
@@ -10,9 +11,12 @@ const MenuCard = ({ user }) => {
       border="1px solid rgba( 255, 255, 255, 0.18 )"
       width="100%"
       borderRadius="3px"
-      className="flex items-center text-lg py-2.5 px-[18px]"
       cursor="pointer"
       marginBottom="5px"
+      className={classNames(
+        "flex items-center text-lg py-2.5 px-[18px]",
+        groupModal && "!rounded-[8px]"
+      )}
     >
       <Avatar
         width="30px"

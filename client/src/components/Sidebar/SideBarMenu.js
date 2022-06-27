@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { MdPersonSearch } from "react-icons/md";
 import { SiWechat } from "react-icons/si";
-//
-import SideDrawer from "./SideDrawer";
 import { Link, useHistory } from "react-router-dom";
 import classNames from "classnames";
+//
+import SideDrawer from "./SideDrawer";
 
 const SideBarMenu = () => {
+  let btnRef = React.useRef();
   let [url, setUrl] = useState(null);
   let history = useHistory();
-  let btnRef = React.useRef();
   let { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     setUrl(history.location.pathname);
