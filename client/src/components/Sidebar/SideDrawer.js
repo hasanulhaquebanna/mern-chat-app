@@ -1,4 +1,5 @@
 import React from "react";
+import { BiSearchAlt } from "react-icons/bi";
 import {
   Box,
   Drawer,
@@ -7,6 +8,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  IconButton,
   Input,
 } from "@chakra-ui/react";
 
@@ -25,7 +27,11 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user = true }) => {
         <DrawerCloseButton />
         <DrawerHeader>Search</DrawerHeader>
         <DrawerBody>
-          <Input placeholder="Type here..." />
+          <Box position="relative" display="flex" gap="5px">
+            <Input placeholder="Type here..." />
+
+            <IconButton aria-label="Search user" icon={<BiSearchAlt />} />
+          </Box>
           {user && (
             <Box marginY="10px">
               <UserMenuCard groupModal={true} />
