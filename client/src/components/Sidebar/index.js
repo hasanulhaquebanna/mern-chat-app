@@ -18,7 +18,7 @@ const Sidebar = ({ user }) => {
       className="flex flex-col p-4 bg-teal-600"
     >
       <Logo />
-      <SideBarMenu />
+      <SideBarMenu user={user} />
       <UserAvatar user={user} />
     </Box>
   );

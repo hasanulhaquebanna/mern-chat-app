@@ -2,7 +2,8 @@ import React from "react";
 import { Avatar, Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
 
-const MenuCard = ({ user, groupModal }) => {
+const MenuCard = ({ item, groupModal }) => {
+  console.log(item);
   return (
     <Box
       _hover={{ background: "rgba( 255, 255, 255, 0.3 )" }}
@@ -21,11 +22,11 @@ const MenuCard = ({ user, groupModal }) => {
       <Avatar
         width="30px"
         height="30px"
-        name={user?.name}
-        src={user?.picture}
+        name={item?.name}
+        src={item?.picture}
         className="mr-[18px]"
       />
-      <Text className="text-base font-normal">{user?.name}</Text>
+      <Text className="text-base font-normal">{item?.name}</Text>
     </Box>
   );
 };

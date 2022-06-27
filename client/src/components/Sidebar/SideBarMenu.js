@@ -7,7 +7,7 @@ import classNames from "classnames";
 //
 import SideDrawer from "./SideDrawer";
 
-const SideBarMenu = () => {
+const SideBarMenu = ({ user }) => {
   let btnRef = React.useRef();
   let [url, setUrl] = useState(null);
   let history = useHistory();
@@ -29,7 +29,12 @@ const SideBarMenu = () => {
             ref={btnRef}
           >
             <MdPersonSearch className="text-3xl absolute" />
-            <SideDrawer isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
+            <SideDrawer
+              isOpen={isOpen}
+              onClose={onClose}
+              btnRef={btnRef}
+              user={user}
+            />
           </Box>
         </Link>
       </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import {
   Box,
@@ -13,8 +13,34 @@ import {
 } from "@chakra-ui/react";
 
 import UserMenuCard from "helpers/UserMenuCard";
+import { toast } from "react-toastify";
+import axios from "axios";
+import ModalLoading from "helpers/ModalLoading";
 
-const SideDrawer = ({ isOpen, onClose, btnRef, user = true, notification }) => {
+const SideDrawer = ({ isOpen, onClose, btnRef, user, notification }) => {
+  let [loading, setLoading] = useState(false);
+  let [results, setResults] = useState([]);
+  let [search, setSearch] = useState("");
+  let handleSearchUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setTimeout(() => {
+        data && setLoading(false);
+      }, [1000]);
+      data && setResults(data);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
+    }
+  };
   return (
     <Drawer
       isOpen={isOpen}
@@ -26,16 +52,28 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user = true, notification }) => {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader>Search</DrawerHeader>
-        <DrawerBody>
+        <DrawerBody overflowX="hidden" overflowY="autho">
           <Box position="relative" display="flex" gap="5px">
-            <Input placeholder="Type here..." />
+            <Input
+              placeholder="Search user..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
 
-            <IconButton aria-label="Search user" icon={<BiSearchAlt />} />
+            <IconButton
+              aria-label="Search user"
+              icon={<BiSearchAlt />}
+              onClick={handleSearchUser}
+            />
           </Box>
-          {user && (
-            <Box marginY="10px">
-              <UserMenuCard groupModal={true} />
-            </Box>
+          {loading ? (
+            <ModalLoading />
+          ) : (
+            results?.map((item, index) => (
+              <Box marginY="10px" key={index}>
+                <UserMenuCard item={item} groupModal={true} />
+              </Box>
+            ))
           )}
         </DrawerBody>
       </DrawerContent>
