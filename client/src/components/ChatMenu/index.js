@@ -1,94 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, IconButton, Text, useDisclosure } from "@chakra-ui/react";
 import { GrAddCircle } from "react-icons/gr";
-import Favourite from "./Favourite";
 import RecentChats from "./RecentChats";
 import GroupModal from "./GroupModal";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { ChatState } from "context/ChatContext";
 
 const ChatMenu = ({ user }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const favourites = [
-    {
-      id: 1,
-      user: "Banna",
-    },
+  let { myChats } = ChatState();
+  let { isOpen, onOpen, onClose } = useDisclosure();
+  let [recentChats, setRecentChats] = useState([]);
+  let [loggedUser, setLoggedUser] = useState();
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
+  let getChats = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER}/chats`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("userInfo")).token
+            }`,
+          },
+        }
+      );
+      data && setRecentChats(data);
+    } catch (error) {
+      toast.error(error.message, {
+        autoClose: 1500,
+      });
+    }
+  };
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
+  useEffect(() => {
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    getChats();
+  }, [myChats]);
 
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-  ];
-  const recentChats = [
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-    {
-      id: 1,
-      user: "Banna",
-    },
-
-    {
-      id: 2,
-      user: "Banna",
-    },
-    {
-      id: 3,
-      user: "Banna",
-    },
-  ];
   return (
     <Box
       marginLeft="80px"
@@ -96,7 +45,8 @@ const ChatMenu = ({ user }) => {
       boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
-      className=" w-[320px] h-screen"
+      className=" w-[20%] h-screen"
+      minHeight="100vh"
     >
       <Box display="flex" flexDirection="column" className="relative">
         <Text
@@ -118,12 +68,16 @@ const ChatMenu = ({ user }) => {
           icon={<GrAddCircle />}
           onClick={onOpen}
         />
-        <GroupModal isOpen={isOpen} onClose={onClose} />
-        {favourites && (
-          <Favourite chats={favourites} recentChats={recentChats} />
-        )}
+        {/* creating group start */}
+        <GroupModal
+          isOpen={isOpen}
+          onClose={onClose}
+          user={user}
+          loggedUser={loggedUser}
+        />
+        {/* creating group end */}
         {recentChats && (
-          <RecentChats chats={recentChats} favourites={favourites} />
+          <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}
       </Box>
     </Box>

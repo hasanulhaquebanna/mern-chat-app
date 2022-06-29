@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 
 const App = () => {
   return (
-    <Box backgroundColor="blue.100" overflow="hidden">
+    <Box overflow="hidden">
       <Switch>
         <Route path="/" exact>
           <Home />

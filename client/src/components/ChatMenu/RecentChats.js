@@ -1,24 +1,36 @@
-import { Box, Text } from "@chakra-ui/react";
 import React from "react";
-import UserMenuCard from "helpers/UserMenuCard";
+import classNames from "classnames";
+import { Box, Text } from "@chakra-ui/react";
 
-const RecentChats = ({ favourites, chats }) => {
+import { ChatState } from "context/ChatContext";
+import RecentChatCard from "helpers/RecentChatCard";
+
+const RecentChats = ({ chats, loggedUser }) => {
+  let { selectedChat, setSelectedChat } = ChatState();
+  let startChat = (userId) => {
+    setSelectedChat(userId);
+  };
+
   return (
-    <Box className="pt-8">
-      {favourites && (
-        <Text
-          textDecoration="underline"
-          fontSize="18px"
-          paddingLeft="5px"
-          marginBottom="5px"
-          className="text-primaryYellow"
-        >
-          #Recents
-        </Text>
-      )}
+    <Box className={classNames("pt-8", chats && "mt-8")}>
+      <Text
+        textDecoration="underline"
+        fontSize="18px"
+        paddingLeft="5px"
+        marginBottom="5px"
+        className="text-primaryYellow"
+      >
+        #Recents
+      </Text>
       <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
         {chats?.map((data, index) => (
-          <UserMenuCard />
+          <RecentChatCard
+            key={index}
+            item={data}
+            loggedUser={loggedUser}
+            selectedChat={selectedChat}
+            handleChat={() => startChat(data?._id)}
+          />
         ))}
       </Box>
     </Box>

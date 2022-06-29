@@ -10,7 +10,7 @@ const Sidebar = ({ user }) => {
     <Box
       width="80px"
       minHeight="100vh"
-      position="fixed"
+      position="absolute"
       left={0}
       top={0}
       height="100vh"
@@ -18,7 +18,7 @@ const Sidebar = ({ user }) => {
       className="flex flex-col p-4 bg-teal-600"
     >
       <Logo />
-      <SideBarMenu />
+      <SideBarMenu user={user} />
       <UserAvatar user={user} />
     </Box>
   );

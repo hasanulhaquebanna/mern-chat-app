@@ -1,20 +1,21 @@
 import { Box } from "@chakra-ui/react";
 import { Home } from "components";
-import React, { useEffect, useState } from "react";
+import { ChatState } from "context/ChatContext";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 const Main = () => {
   const history = useHistory();
-  let [user, setUser] = useState("");
+  let { user, setUser } = ChatState();
   useEffect(() => {
     if (!localStorage?.getItem("userInfo")) {
       history.push("/login");
     } else {
       setUser(JSON.parse(localStorage.getItem("userInfo")));
     }
-  }, [history]);
+  }, [history, setUser]);
   return (
-    <Box>
+    <Box className="flex">
       {/* sidebar drawer */}
       <Home user={user} />
     </Box>
