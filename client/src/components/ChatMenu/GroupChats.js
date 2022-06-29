@@ -1,9 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
 import React from "react";
-import UserMenuCard from "../../helpers/UserMenuCard";
+import GroupMenuCard from "../../helpers/GroupMenuCard";
 
-const Favourite = ({ recentChats, chats }) => {
+const Groups = ({ recentChats, chats }) => {
   return (
     <Box
       className={classNames(
@@ -18,15 +18,15 @@ const Favourite = ({ recentChats, chats }) => {
         marginBottom="5px"
         className="text-primaryYellow"
       >
-        #Favourites
+        #Groups
       </Text>
       <Box className="flex flex-col min-h-[200px] overflow-y-auto  max-h-[500px]">
         {chats?.map((data, index) => (
-          <UserMenuCard />
+          <GroupMenuCard />
         ))}
       </Box>
     </Box>
   );
 };
 
-export default Favourite;
+export default Groups;

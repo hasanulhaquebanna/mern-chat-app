@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Box, IconButton, Text, useDisclosure } from "@chakra-ui/react";
-import { GrAddCircle } from "react-icons/gr";
-import RecentChats from "./RecentChats";
-import GroupModal from "./GroupModal";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { MdOutlineGroupAdd } from "react-icons/md";
+
 import { ChatState } from "context/ChatContext";
+import RecentChats from "./RecentChats";
+import GroupChats from "./GroupChats";
+import GroupModal from "./GroupModal";
 
 const ChatMenu = ({ user }) => {
   let { myChats } = ChatState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
+  let [groupChats, setGroupChats] = useState([]);
   let [loggedUser, setLoggedUser] = useState();
 
   let getChats = async () => {
@@ -26,6 +29,9 @@ const ChatMenu = ({ user }) => {
         }
       );
       data && setRecentChats(data);
+      console.log(myChats);
+      // if (!myChats.find((c) => c._id === data._id))
+      //   setRecentChats([data, ...data]);
     } catch (error) {
       toast.error(error.message, {
         autoClose: 1500,
@@ -65,7 +71,7 @@ const ChatMenu = ({ user }) => {
           backdropFilter="blur( 8px )"
           border="1px solid rgba( 255, 255, 255, 0.18 )"
           aria-label="Add to group"
-          icon={<GrAddCircle />}
+          icon={<MdOutlineGroupAdd />}
           onClick={onOpen}
         />
         {/* creating group start */}
@@ -76,6 +82,7 @@ const ChatMenu = ({ user }) => {
           loggedUser={loggedUser}
         />
         {/* creating group end */}
+        {groupChats && <GroupChats />}
         {recentChats && (
           <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}
