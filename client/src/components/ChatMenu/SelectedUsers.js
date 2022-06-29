@@ -10,9 +10,14 @@ const SelectedUsers = ({
   loading,
   handleSelectUsers,
   selectedUsers,
+  setSelectedUsers,
   results,
 }) => {
-  let handleUser = () => {};
+  let handleUserDelete = (user) => {
+    setSelectedUsers(
+      selectedUsers.filter((selectedUser) => selectedUser._id !== user._id)
+    );
+  };
   return (
     <>
       <Input
@@ -24,7 +29,7 @@ const SelectedUsers = ({
         {selectedUsers?.map((user, index) => (
           <SelectedUserBadge
             key={index}
-            handleUser={() => handleUser(user)}
+            handleUser={() => handleUserDelete(user)}
             user={user}
           />
         ))}

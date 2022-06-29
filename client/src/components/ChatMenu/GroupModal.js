@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
-  Box,
   Button,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,14 +12,18 @@ import {
 import { toast } from "react-toastify";
 import axios from "axios";
 import SelectedUsers from "./SelectedUsers";
+import GroupName from "./GroupName";
 
 const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [selectedUsers, setSelectedUsers] = useState([]);
+  let [selectGroup, setSelectGroup] = useState(false);
+  let [groupName, setGroupName] = useState("");
   let [search, setSearch] = useState("");
   let clear = () => {
     setResults([]);
+    setSelectGroup(false);
     setSearch("");
   };
   let handleSearchUser = async (e) => {
@@ -53,12 +55,22 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
   };
   let handleSelectUsers = (user) => {
     if (selectedUsers.includes(user)) {
-      toast.info("User already selected", {
+      toast.error("User already selected", {
         position: "bottom-right",
+        autoClose: 500,
       });
       return;
     }
     setSelectedUsers([...selectedUsers, user]);
+  };
+  let createGroup = async () => {
+    try {
+    } catch (error) {
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 1000,
+      });
+    }
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -67,17 +79,34 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
         <ModalHeader>Create a group chat</ModalHeader>
         <ModalCloseButton onClick={clear} />
         <ModalBody paddingBottom="40px">
-          <SelectedUsers
-            search={search}
-            handleSearchUser={handleSearchUser}
-            loading={loading}
-            handleSelectUsers={handleSelectUsers}
-            results={results}
-            selectedUsers={selectedUsers}
-          />
+          {!selectGroup ? (
+            <SelectedUsers
+              search={search}
+              handleSearchUser={handleSearchUser}
+              loading={loading}
+              handleSelectUsers={handleSelectUsers}
+              results={results}
+              setSelectedUsers={setSelectedUsers}
+              selectedUsers={selectedUsers}
+            />
+          ) : (
+            <GroupName setGroupName={setGroupName} groupName={groupName} />
+          )}
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue">next</Button>
+          {!selectGroup ? (
+            <Button
+              colorScheme="blue"
+              disabled={selectedUsers.length < 3}
+              onClick={() => setSelectGroup(true)}
+            >
+              next
+            </Button>
+          ) : (
+            <Button colorScheme="blue" onClick={createGroup}>
+              Create group
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>
