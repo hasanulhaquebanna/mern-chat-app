@@ -5,38 +5,38 @@ import RecentChats from "./RecentChats";
 import GroupModal from "./GroupModal";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
 import { ChatState } from "context/ChatContext";
 
 const ChatMenu = ({ user }) => {
-  console.log(user);
-  let history = useHistory();
+  let { myChats } = ChatState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
-  let [favourites, setFavourites] = useState([]);
+  let [loggedUser, setLoggedUser] = useState();
+
+  let getChats = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER}/chats`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("userInfo")).token
+            }`,
+          },
+        }
+      );
+      data && setRecentChats(data);
+    } catch (error) {
+      toast.error(error.message, {
+        autoClose: 1500,
+      });
+    }
+  };
 
   useEffect(() => {
-    setTimeout(async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_SERVER}/chats`,
-          {
-            headers: {
-              Authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("userInfo")).token
-              }`,
-            },
-          }
-        );
-        data && setRecentChats(data);
-        console.log(data);
-      } catch (error) {
-        toast.error(error.message, {
-          autoClose: 1500,
-        });
-      }
-    }, 2000);
-  }, []);
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    getChats();
+  }, [myChats]);
 
   return (
     <Box
@@ -68,9 +68,14 @@ const ChatMenu = ({ user }) => {
           icon={<GrAddCircle />}
           onClick={onOpen}
         />
-        <GroupModal isOpen={isOpen} onClose={onClose} user={user} />
+        <GroupModal
+          isOpen={isOpen}
+          onClose={onClose}
+          user={user}
+          loggedUser={loggedUser}
+        />
         {recentChats && (
-          <RecentChats chats={recentChats} favourites={favourites} />
+          <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}
       </Box>
     </Box>

@@ -19,7 +19,7 @@ import ModalLoading from "helpers/ModalLoading";
 import { ChatState } from "context/ChatContext";
 
 const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
-  let { setSelectedChat } = ChatState();
+  let { myChats, setMyChats } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");
@@ -63,7 +63,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
           },
         }
       );
-      data && setSelectedChat(data);
+      data && setMyChats(data);
       onClose();
     } catch (error) {
       toast.error(error.message, {

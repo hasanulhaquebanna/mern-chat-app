@@ -4,7 +4,6 @@ const { TOKEN } = require("../env");
 const User = require("../models/users");
 
 module.exports = asyncHandler(async (req, res, next) => {
-  console.log(req.headers.authorization.split(" ")[1]);
   try {
     let token;
     if (
