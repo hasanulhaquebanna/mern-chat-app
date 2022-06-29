@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Box, Text } from "@chakra-ui/react";
 
 import { ChatState } from "context/ChatContext";
-import RecentChatCard from "helpers/RecentChatCard";
+import RecentChatCard from "libs/RecentChatCard";
 
 const RecentChats = ({ chats, loggedUser }) => {
   let { selectedChat, setSelectedChat } = ChatState();

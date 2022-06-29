@@ -16,7 +16,7 @@ import GroupName from "./GroupName";
 import { ChatState } from "context/ChatContext";
 
 const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
-  let { setMyChats } = ChatState();
+  let { myChats, setMyChats } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [selectedUsers, setSelectedUsers] = useState([]);
@@ -82,7 +82,7 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
         }
       );
       data && setLoading(false);
-      data && setMyChats(data);
+      data && setMyChats([data, ...myChats]);
       data && onClose();
       data &&
         toast.success(data.message || data.error, {

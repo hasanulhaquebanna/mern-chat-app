@@ -12,10 +12,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-import UserMenuCard from "helpers/UserMenuCard";
+import UserMenuCard from "libs/UserMenuCard";
 import { toast } from "react-toastify";
 import axios from "axios";
-import ModalLoading from "helpers/ModalLoading";
+import ModalLoading from "libs/ModalLoading";
 import { ChatState } from "context/ChatContext";
 
 const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {

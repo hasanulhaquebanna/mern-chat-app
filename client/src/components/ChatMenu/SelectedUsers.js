@@ -1,6 +1,5 @@
 import { Box, Input } from "@chakra-ui/react";
-import ModalLoading from "helpers/ModalLoading";
-import UserMenuCard from "helpers/UserMenuCard";
+import { ModalLoading, UserMenuCard } from "libs";
 import React from "react";
 import SelectedUserBadge from "./SelectedUserBadge";
 
