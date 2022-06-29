@@ -14,7 +14,7 @@ import ModalLoading from "helpers/ModalLoading";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const GroupModal = ({ isOpen, onClose, user }) => {
+const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");

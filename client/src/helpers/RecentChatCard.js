@@ -3,7 +3,13 @@ import { Avatar, Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
 import { getChatUser } from "./getChatUser";
 
-const RecentChatCard = ({ item, groupModal, handleChat, loggedUser }) => {
+const RecentChatCard = ({
+  item,
+  groupModal,
+  handleChat,
+  loggedUser,
+  selectedChat,
+}) => {
   return (
     <Box
       _hover={{ background: "#059669", color: "white" }}
@@ -15,8 +21,8 @@ const RecentChatCard = ({ item, groupModal, handleChat, loggedUser }) => {
       cursor="pointer"
       marginBottom="5px"
       className={classNames(
-        "flex items-center text-lg py-2.5 px-[18px]"
-        // groupModal && "!rounded-[8px]"
+        "flex items-center text-lg py-2.5 px-[18px]",
+        selectedChat === item._id && "bg-[#059669]"
       )}
       onClick={handleChat}
     >

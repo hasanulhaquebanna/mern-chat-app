@@ -6,7 +6,7 @@ import { ChatState } from "context/ChatContext";
 import RecentChatCard from "helpers/RecentChatCard";
 
 const RecentChats = ({ chats, loggedUser }) => {
-  let { setSelectedChat } = ChatState();
+  let { selectedChat, setSelectedChat } = ChatState();
   let startChat = (userId) => {
     setSelectedChat(userId);
   };
@@ -28,6 +28,7 @@ const RecentChats = ({ chats, loggedUser }) => {
             key={index}
             item={data}
             loggedUser={loggedUser}
+            selectedChat={selectedChat}
             handleChat={() => startChat(data?._id)}
           />
         ))}

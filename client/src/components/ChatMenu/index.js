@@ -68,12 +68,14 @@ const ChatMenu = ({ user }) => {
           icon={<GrAddCircle />}
           onClick={onOpen}
         />
+        {/* creating group start */}
         <GroupModal
           isOpen={isOpen}
           onClose={onClose}
           user={user}
           loggedUser={loggedUser}
         />
+        {/* creating group end */}
         {recentChats && (
           <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}
