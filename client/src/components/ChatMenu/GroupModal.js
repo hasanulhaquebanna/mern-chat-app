@@ -13,8 +13,10 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import SelectedUsers from "./SelectedUsers";
 import GroupName from "./GroupName";
+import { ChatState } from "context/ChatContext";
 
 const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
+  let { setMyChats } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [selectedUsers, setSelectedUsers] = useState([]);
@@ -25,6 +27,7 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
     setResults([]);
     setSelectGroup(false);
     setSearch("");
+    setSelectedUsers([]);
   };
   let handleSearchUser = async (e) => {
     setSearch(e.target.value);
@@ -65,7 +68,30 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
   };
   let createGroup = async () => {
     try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER}group/creategroup`,
+        {
+          name: groupName,
+          users: JSON.stringify(selectedUsers.map((user) => user._id)),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      data && setLoading(false);
+      data && setMyChats(data);
+      data && onClose();
+      data &&
+        toast.success(data.message || data.error, {
+          position: "bottom-right",
+          autoClose: 500,
+        });
+      clear();
     } catch (error) {
+      setLoading(false);
       toast.error(error.message, {
         position: "bottom-right",
         autoClose: 1000,
@@ -103,7 +129,12 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
               next
             </Button>
           ) : (
-            <Button colorScheme="blue" onClick={createGroup}>
+            <Button
+              isLoading={loading}
+              colorScheme="blue"
+              disabled={groupName.length < 4}
+              onClick={createGroup}
+            >
               Create group
             </Button>
           )}

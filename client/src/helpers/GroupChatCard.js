@@ -26,7 +26,7 @@ const RecentChatCard = ({
       )}
       onClick={handleChat}
     >
-      {!item.isGroup && (
+      {!item.isGroup ? (
         <>
           <Avatar
             width="30px"
@@ -39,6 +39,8 @@ const RecentChatCard = ({
             {getChatUser(loggedUser, item.users)?.name}
           </Text>
         </>
+      ) : (
+        <Text className="text-base font-normal">{item?.chatName}</Text>
       )}
     </Box>
   );

@@ -13,25 +13,18 @@ const ChatMenu = ({ user }) => {
   let { myChats } = ChatState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
-  let [groupChats, setGroupChats] = useState([]);
   let [loggedUser, setLoggedUser] = useState();
 
   let getChats = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER}/chats`,
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("userInfo")).token
-            }`,
-          },
-        }
-      );
+      const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("userInfo")).token
+          }`,
+        },
+      });
       data && setRecentChats(data);
-      console.log(myChats);
-      // if (!myChats.find((c) => c._id === data._id))
-      //   setRecentChats([data, ...data]);
     } catch (error) {
       toast.error(error.message, {
         autoClose: 1500,
@@ -42,6 +35,7 @@ const ChatMenu = ({ user }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
+    console.log(recentChats);
   }, [myChats]);
 
   return (
@@ -82,7 +76,9 @@ const ChatMenu = ({ user }) => {
           loggedUser={loggedUser}
         />
         {/* creating group end */}
-        {groupChats && <GroupChats />}
+        {recentChats && (
+          <GroupChats chats={recentChats} loggedUser={loggedUser} />
+        )}
         {recentChats && (
           <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}

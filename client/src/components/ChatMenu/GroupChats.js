@@ -1,16 +1,18 @@
-import { Box, Text } from "@chakra-ui/react";
-import classNames from "classnames";
 import React from "react";
-import GroupMenuCard from "../../helpers/GroupMenuCard";
+import classNames from "classnames";
+import { Box, Text } from "@chakra-ui/react";
 
-const Groups = ({ recentChats, chats }) => {
+import { ChatState } from "context/ChatContext";
+import GroupChatCard from "helpers/GroupChatCard";
+
+const RecentChats = ({ chats, loggedUser }) => {
+  let { selectedChat, setSelectedChat } = ChatState();
+  let startChat = (userId) => {
+    setSelectedChat(userId);
+  };
+
   return (
-    <Box
-      className={classNames(
-        "pt-8 overflow-hidden",
-        recentChats && "max-h-[292px] "
-      )}
-    >
+    <Box className={classNames("pt-8", chats && "mt-8")}>
       <Text
         textDecoration="underline"
         fontSize="18px"
@@ -20,13 +22,21 @@ const Groups = ({ recentChats, chats }) => {
       >
         #Groups
       </Text>
-      <Box className="flex flex-col min-h-[200px] overflow-y-auto  max-h-[500px]">
-        {chats?.map((data, index) => (
-          <GroupMenuCard />
-        ))}
+      <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
+        {chats
+          .filter((c) => c.isGroup === true)
+          ?.map((data, index) => (
+            <GroupChatCard
+              key={index}
+              item={data}
+              loggedUser={loggedUser}
+              selectedChat={selectedChat}
+              handleChat={() => startChat(data?._id)}
+            />
+          ))}
       </Box>
     </Box>
   );
 };
 
-export default Groups;
+export default RecentChats;

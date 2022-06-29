@@ -1,4 +1,4 @@
-import { Box, Input, Text } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import ModalLoading from "helpers/ModalLoading";
 import UserMenuCard from "helpers/UserMenuCard";
 import React from "react";

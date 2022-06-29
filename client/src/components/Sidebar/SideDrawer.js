@@ -19,7 +19,7 @@ import ModalLoading from "helpers/ModalLoading";
 import { ChatState } from "context/ChatContext";
 
 const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
-  let { myChats, setMyChats } = ChatState();
+  let { setMyChats } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");
@@ -54,7 +54,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
   let createChat = async (userId) => {
     try {
       let { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER}/chats`,
+        `${process.env.REACT_APP_SERVER}chats`,
         { userId },
         {
           headers: {

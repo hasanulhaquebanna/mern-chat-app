@@ -23,15 +23,17 @@ const RecentChats = ({ chats, loggedUser }) => {
         #Recents
       </Text>
       <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
-        {chats?.map((data, index) => (
-          <RecentChatCard
-            key={index}
-            item={data}
-            loggedUser={loggedUser}
-            selectedChat={selectedChat}
-            handleChat={() => startChat(data?._id)}
-          />
-        ))}
+        {chats
+          .filter((c) => c.isGroup !== true)
+          ?.map((data, index) => (
+            <RecentChatCard
+              key={index}
+              item={data}
+              loggedUser={loggedUser}
+              selectedChat={selectedChat}
+              handleChat={() => startChat(data?._id)}
+            />
+          ))}
       </Box>
     </Box>
   );
