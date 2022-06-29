@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   Input,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import UserMenuCard from "helpers/UserMenuCard";
-import ModalLoading from "helpers/ModalLoading";
 import { toast } from "react-toastify";
 import axios from "axios";
+import SelectedUsers from "./SelectedUsers";
 
 const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
+  let [selectedUsers, setSelectedUsers] = useState([]);
   let [search, setSearch] = useState("");
   let clear = () => {
     setResults([]);
@@ -49,28 +51,34 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
       });
     }
   };
+  let handleSelectUsers = (user) => {
+    if (selectedUsers.includes(user)) {
+      toast.info("User already selected", {
+        position: "bottom-right",
+      });
+      return;
+    }
+    setSelectedUsers([...selectedUsers, user]);
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create a group or chat</ModalHeader>
+        <ModalHeader>Create a group chat</ModalHeader>
         <ModalCloseButton onClick={clear} />
         <ModalBody paddingBottom="40px">
-          <Input
-            placeholder="Search user"
-            value={search}
-            onChange={(e) => handleSearchUser(e)}
+          <SelectedUsers
+            search={search}
+            handleSearchUser={handleSearchUser}
+            loading={loading}
+            handleSelectUsers={handleSelectUsers}
+            results={results}
+            selectedUsers={selectedUsers}
           />
-          {loading ? (
-            <ModalLoading />
-          ) : (
-            results?.map((item, index) => (
-              <Box marginY="10px" key={index}>
-                <UserMenuCard item={item} groupModal={true} />
-              </Box>
-            ))
-          )}
         </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="blue">next</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
