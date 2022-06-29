@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, IconButton, Text, useDisclosure } from "@chakra-ui/react";
-import { GrAddCircle } from "react-icons/gr";
-import RecentChats from "./RecentChats";
-import GroupModal from "./GroupModal";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { MdOutlineGroupAdd } from "react-icons/md";
+
 import { ChatState } from "context/ChatContext";
+import RecentChats from "./RecentChats";
+import GroupChats from "./GroupChats";
+import GroupModal from "./GroupModal";
 
 const ChatMenu = ({ user }) => {
   let { myChats } = ChatState();
@@ -15,16 +17,13 @@ const ChatMenu = ({ user }) => {
 
   let getChats = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER}/chats`,
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("userInfo")).token
-            }`,
-          },
-        }
-      );
+      const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("userInfo")).token
+          }`,
+        },
+      });
       data && setRecentChats(data);
     } catch (error) {
       toast.error(error.message, {
@@ -36,6 +35,7 @@ const ChatMenu = ({ user }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
+    console.log(recentChats);
   }, [myChats]);
 
   return (
@@ -65,7 +65,7 @@ const ChatMenu = ({ user }) => {
           backdropFilter="blur( 8px )"
           border="1px solid rgba( 255, 255, 255, 0.18 )"
           aria-label="Add to group"
-          icon={<GrAddCircle />}
+          icon={<MdOutlineGroupAdd />}
           onClick={onOpen}
         />
         {/* creating group start */}
@@ -76,6 +76,9 @@ const ChatMenu = ({ user }) => {
           loggedUser={loggedUser}
         />
         {/* creating group end */}
+        {recentChats && (
+          <GroupChats chats={recentChats} loggedUser={loggedUser} />
+        )}
         {recentChats && (
           <RecentChats chats={recentChats} loggedUser={loggedUser} />
         )}
