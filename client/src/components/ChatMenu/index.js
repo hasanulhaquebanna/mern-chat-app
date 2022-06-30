@@ -35,7 +35,6 @@ const ChatMenu = ({ user }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
-    console.log(recentChats);
   }, [myChats]);
 
   return (

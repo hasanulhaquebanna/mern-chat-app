@@ -6,9 +6,7 @@ import ChatHeader from "./ChatHeader";
 
 const Chat = () => {
   let { selectedChat } = ChatState();
-  useEffect(() => {
-    // console.log(selectedChat);
-  }, [selectedChat]);
+  useEffect(() => {}, [selectedChat]);
   return (
     <Box
       marginLeft="0px"

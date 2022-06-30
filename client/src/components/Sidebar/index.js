@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 
 import Logo from "./Logo";
 import SideBarMenu from "./SideBarMenu";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "libs/UserAvatar";
 
 const Sidebar = ({ user }) => {
   return (
