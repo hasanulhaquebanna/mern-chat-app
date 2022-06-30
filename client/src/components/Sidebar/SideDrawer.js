@@ -38,7 +38,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
         `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${user?.token}`,
           },
         }
       );

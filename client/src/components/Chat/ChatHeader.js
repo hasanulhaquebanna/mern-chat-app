@@ -1,10 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ChatState } from "context/ChatContext";
-import { getChatUser } from "helpers";
 import React from "react";
+import ChatName from "./ChatName";
 
 const ChatHeader = () => {
-  let { user, selectedChat } = ChatState();
   return (
     <Box
       position="absolute"
@@ -17,11 +15,7 @@ const ChatHeader = () => {
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
     >
-      {selectedChat?.isGroup ? (
-        <Text>{selectedChat?.chatName}</Text>
-      ) : (
-        <Text>{getChatUser(user, selectedChat.users)?.name}</Text>
-      )}
+      <ChatName />
     </Box>
   );
 };

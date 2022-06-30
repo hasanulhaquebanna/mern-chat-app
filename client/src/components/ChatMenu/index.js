@@ -20,7 +20,7 @@ const ChatMenu = ({ user }) => {
       const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem("userInfo"))?.token
           }`,
         },
       });
