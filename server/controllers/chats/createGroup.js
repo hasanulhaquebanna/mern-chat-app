@@ -28,11 +28,29 @@ module.exports = expressAsyncHandler(async (req, res) => {
       const group = await Chat.findOne({ _id: createGroup._id })
         .populate("users", "-password")
         .populate("groupAdmin", "-password");
-
+      const {
+        chatName,
+        createdAt,
+        groupAdmin,
+        _id,
+        email,
+        picture,
+        isGroup,
+        updatedAt,
+        users,
+      } = group;
       res.status(200).json({
         success: true,
         message: "Group created successfully",
-        group,
+        _id,
+        chatName,
+        createdAt,
+        groupAdmin,
+        email,
+        picture,
+        isGroup,
+        updatedAt,
+        users,
       });
     } else {
       res.json({ error: "Group not created" });

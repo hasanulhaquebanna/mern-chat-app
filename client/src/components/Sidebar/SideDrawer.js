@@ -19,11 +19,11 @@ import ModalLoading from "libs/ModalLoading";
 import { ChatState } from "context/ChatContext";
 
 const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
-  let { setMyChats } = ChatState();
+  let { setMyChats, setSelectedChat } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [search, setSearch] = useState("");
-  let clearInpu = () => {
+  let clearInput = () => {
     setResults([]);
     setSearch("");
   };
@@ -64,6 +64,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
         }
       );
       data && setMyChats(data);
+      data && setSelectedChat(data);
       onClose();
     } catch (error) {
       toast.error(error.message, {
@@ -81,7 +82,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
     >
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton onClick={clearInpu} />
+        <DrawerCloseButton onClick={clearInput} />
         <DrawerHeader>Search</DrawerHeader>
         <DrawerBody overflowX="hidden" overflowY="autho">
           <Box position="relative" display="flex" gap="5px">

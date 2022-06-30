@@ -16,7 +16,7 @@ import GroupName from "./GroupName";
 import { ChatState } from "context/ChatContext";
 
 const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
-  let { myChats, setMyChats } = ChatState();
+  let { myChats, setMyChats, setSelectedChat } = ChatState();
   let [loading, setLoading] = useState(false);
   let [results, setResults] = useState([]);
   let [selectedUsers, setSelectedUsers] = useState([]);
@@ -41,7 +41,7 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
         `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
         {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
@@ -82,8 +82,10 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
         }
       );
       data && setLoading(false);
-      data && setMyChats([data, ...myChats]);
+      data && setMyChats(data);
+      data && setSelectedChat(data);
       data && onClose();
+      data && clear();
       data &&
         toast.success(data.message || data.error, {
           position: "bottom-right",
