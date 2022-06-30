@@ -76,12 +76,9 @@ const ChatMenu = ({ user }) => {
           loggedUser={loggedUser}
         />
         {/* creating group end */}
-        {recentChats && (
-          <GroupChats chats={recentChats} loggedUser={loggedUser} />
-        )}
-        {recentChats && (
-          <RecentChats chats={recentChats} loggedUser={loggedUser} />
-        )}
+
+        <GroupChats chats={recentChats} loggedUser={loggedUser} />
+        <RecentChats chats={recentChats} loggedUser={loggedUser} />
       </Box>
     </Box>
   );

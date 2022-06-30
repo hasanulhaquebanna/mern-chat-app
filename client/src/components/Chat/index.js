@@ -1,13 +1,14 @@
-import { Box } from "@chakra-ui/react";
-import { ChatState } from "context/ChatContext";
 import React, { useEffect } from "react";
+import { Box } from "@chakra-ui/react";
+
+import { ChatState } from "context/ChatContext";
 import ChatHeader from "./ChatHeader";
 
 const Chat = () => {
-  // let { chats, setChats, selectedChat, setSelectedChat } = ChatState();
-  // useEffect(() => {
-  //   console.log(selectedChat);
-  // }, [selectedChat]);
+  let { selectedChat } = ChatState();
+  useEffect(() => {
+    // console.log(selectedChat);
+  }, [selectedChat]);
   return (
     <Box
       marginLeft="0px"

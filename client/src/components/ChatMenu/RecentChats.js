@@ -7,8 +7,8 @@ import RecentChatCard from "libs/RecentChatCard";
 
 const RecentChats = ({ chats, loggedUser }) => {
   let { selectedChat, setSelectedChat } = ChatState();
-  let startChat = (userId) => {
-    setSelectedChat(userId);
+  let startChat = (user) => {
+    setSelectedChat(user);
   };
 
   return (
@@ -31,7 +31,7 @@ const RecentChats = ({ chats, loggedUser }) => {
               item={data}
               loggedUser={loggedUser}
               selectedChat={selectedChat}
-              handleChat={() => startChat(data?._id)}
+              handleChat={() => startChat(data)}
             />
           ))}
       </Box>

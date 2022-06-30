@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, Text } from "@chakra-ui/react";
 import classNames from "classnames";
-import { getChatUser } from "helpers/getChatUser";
+import { getChatUser } from "helpers";
 
 const RecentChatCard = ({
   item,
@@ -22,7 +22,7 @@ const RecentChatCard = ({
       marginBottom="5px"
       className={classNames(
         "flex items-center text-lg py-2.5 px-[18px]",
-        selectedChat === item._id && "bg-[#059669] text-white !font-bold"
+        selectedChat?._id === item?._id && "bg-[#059669] text-white !font-bold"
       )}
       onClick={handleChat}
     >

@@ -105,7 +105,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
                 <UserMenuCard
                   item={item}
                   groupModal={true}
-                  handleChat={() => createChat(item?._id)}
+                  handleChat={() => createChat(item)}
                   currentUser={user}
                 />
               </Box>
