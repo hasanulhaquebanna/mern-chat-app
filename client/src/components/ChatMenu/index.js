@@ -32,18 +32,22 @@ const ChatMenu = ({ user }) => {
     }
   };
 
+  // set default chat
+  const setDefaultChat = () => {
+    let defaultChat = recentChats.filter((c) => c);
+    console.log(defaultChat);
+  };
+
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
+    // setDefaultChat();
   }, [myChats]);
 
   return (
     <Box
       marginLeft="80px"
       background="rgba( 255, 255, 255, 0.22 )"
-      boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
-      backdropFilter="blur( 8px )"
-      border="1px solid rgba( 255, 255, 255, 0.18 )"
       className=" w-[20%] h-screen"
       minHeight="100vh"
     >

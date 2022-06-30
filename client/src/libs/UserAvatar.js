@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Avatar, Box, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import classNames from "classnames";
 
-const UserAvatar = ({ user }) => {
+const UserAvatar = ({ className, user }) => {
   let history = useHistory();
   let [logout, setLogOut] = useState(false);
   let handleLogOut = () => {
@@ -12,7 +13,10 @@ const UserAvatar = ({ user }) => {
 
   return (
     <Box
-      className="flex items-center justify-center cursor-pointer"
+      className={classNames(
+        "flex items-center justify-center cursor-pointer",
+        className
+      )}
       onClick={() => setLogOut((prev) => !prev)}
     >
       <Avatar
