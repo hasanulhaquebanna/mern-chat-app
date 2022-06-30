@@ -10,7 +10,7 @@ import GroupChats from "./GroupChats";
 import GroupModal from "./GroupModal";
 
 const ChatMenu = ({ user }) => {
-  let { myChats } = ChatState();
+  let { myChats, setSelectedChat, selectedChat } = ChatState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
   let [loggedUser, setLoggedUser] = useState();
@@ -32,16 +32,13 @@ const ChatMenu = ({ user }) => {
     }
   };
 
-  // set default chat
-  const setDefaultChat = () => {
-    let defaultChat = recentChats.filter((c) => c);
-    console.log(defaultChat);
-  };
+  useEffect(() => {
+    recentChats?.slice(0, 1)?.map((c) => setSelectedChat(c));
+  }, [recentChats, setSelectedChat]);
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
-    // setDefaultChat();
   }, [myChats]);
 
   return (

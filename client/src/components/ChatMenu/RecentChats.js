@@ -9,6 +9,8 @@ const RecentChats = ({ chats, loggedUser }) => {
   let { selectedChat, setSelectedChat } = ChatState();
   let startChat = (user) => {
     setSelectedChat(user);
+    console.log(user);
+    localStorage.setItem("deafultChat", JSON.stringify(user?._id));
   };
 
   return (
