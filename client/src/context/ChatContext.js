@@ -6,6 +6,7 @@ const ChatContext = createContext();
 const ChatProvider = ({ children }) => {
   let [user, setUser] = useState("");
   let [myChats, setMyChats] = useState([]);
+  let [messages, setMessages] = useState([]);
   let [selectedChat, setSelectedChat] = useState();
 
   const getUser = async () => {
@@ -21,7 +22,9 @@ const ChatProvider = ({ children }) => {
         user,
         setUser,
         myChats,
+        messages,
         setMyChats,
+        setMessages,
         selectedChat,
         setSelectedChat,
       }}
