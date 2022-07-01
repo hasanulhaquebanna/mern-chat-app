@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import ChatAvatar from "./ChatAvatar";
 import ChatName from "./ChatName";
+import ChatSetting from "./ChatSetting";
 
 const ChatHeader = () => {
   return (
@@ -15,10 +16,12 @@ const ChatHeader = () => {
       boxShadow="0px -4px 20px 0 rgb(82 82 92 / 37%)"
       backdropFilter="blur( 8px )"
       border="1px solid rgba( 255, 255, 255, 0.18 )"
+      overflow="hidden"
     >
       <Box className="flex justify-between items-center p-5">
         <ChatName />
         <ChatAvatar />
+        <ChatSetting />
       </Box>
     </Box>
   );

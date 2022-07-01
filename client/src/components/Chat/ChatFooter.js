@@ -6,7 +6,7 @@ import { ChatState } from "context/ChatContext";
 import axios from "axios";
 
 const ChatFooter = () => {
-  let { user, selectedChat, messages, setMessages } = ChatState();
+  let { user, selectedChat, setMessages } = ChatState();
   let [message, setMessage] = useState("");
 
   let handleFormSubmit = async (e) => {
@@ -22,12 +22,11 @@ const ChatFooter = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${user?.token}`,
           },
         }
       );
       setMessages(data);
-      console.log(data);
     } catch (error) {
       toast.error(error.message);
     }
