@@ -3,19 +3,37 @@ import { Box, Button, FormControl, Input } from "@chakra-ui/react";
 import { IoMdSend } from "react-icons/io";
 import { toast } from "react-toastify";
 import { ChatState } from "context/ChatContext";
+import axios from "axios";
 
 const ChatFooter = () => {
-  let { selectedChat } = ChatState();
+  let { user, selectedChat, setMessages } = ChatState();
   let [message, setMessage] = useState("");
 
   let handleFormSubmit = async (e) => {
     e.preventDefault();
-    alert("helo");
+    try {
+      setMessage("");
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER}messages`,
+        {
+          message,
+          chatId: selectedChat._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
+      setMessages(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   let handleMessageForm = (e) => {
     if (e.key === "Enter" && message) {
       handleFormSubmit(e);
-      console.log(message);
     }
   };
   return (

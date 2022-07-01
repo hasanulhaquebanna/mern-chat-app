@@ -4,8 +4,10 @@ import { useHistory } from "react-router-dom";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
+  let history = useHistory();
   let [user, setUser] = useState("");
   let [myChats, setMyChats] = useState([]);
+  let [messages, setMessages] = useState([]);
   let [selectedChat, setSelectedChat] = useState();
 
   const getUser = async () => {
@@ -13,6 +15,9 @@ const ChatProvider = ({ children }) => {
     setUser(userInfo);
   };
   useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
     getUser();
   }, []);
   return (
@@ -21,6 +26,8 @@ const ChatProvider = ({ children }) => {
         user,
         setUser,
         myChats,
+        messages,
+        setMessages,
         setMyChats,
         selectedChat,
         setSelectedChat,

@@ -20,12 +20,12 @@ const theme = extendTheme({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ChatProvider>
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
+  <ChakraProvider theme={theme}>
+    <BrowserRouter>
+      <ChatProvider>
         <App />
         <ToastContainer />
-      </BrowserRouter>
-    </ChakraProvider>
-  </ChatProvider>
+      </ChatProvider>
+    </BrowserRouter>
+  </ChakraProvider>
 );

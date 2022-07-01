@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { ChatState } from "context/ChatContext";
+import { MessageBody } from "components";
 import ChatHeader from "./ChatHeader";
 import ChatFooter from "./ChatFooter";
 
 const Chat = () => {
-  let { selectedChat } = ChatState();
-  useEffect(() => {}, [selectedChat]);
   return (
     <Box
       marginLeft="0px"
@@ -17,6 +16,7 @@ const Chat = () => {
       className=" w-[50%] h-screen ml-[5px] flex flex-col justify-between relative overflow-hidden"
     >
       <ChatHeader />
+      <MessageBody />
       <ChatFooter />
     </Box>
   );
