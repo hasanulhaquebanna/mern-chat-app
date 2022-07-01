@@ -32,9 +32,13 @@ const ChatMenu = ({ user }) => {
     }
   };
 
-  // useEffect(() => {
-  //   recentChats?.slice(0, 1)?.map((c) => setSelectedChat(c));
-  // }, [recentChats, setSelectedChat]);
+  useEffect(() => {
+    const random = Math.floor(
+      Math.random(recentChats.length) * recentChats.length
+    );
+    !selectedChat &&
+      recentChats?.slice(random, random + 1)?.map((c) => setSelectedChat(c));
+  }, [recentChats, setSelectedChat]);
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
