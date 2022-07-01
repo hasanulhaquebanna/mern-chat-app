@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Box, Text } from "@chakra-ui/react";
 
 import { ChatState } from "context/ChatContext";
-import GroupChatCard from "libs/GroupChatCard";
+import { GroupChatCard } from "libs";
 
 const RecentChats = ({ chats, loggedUser }) => {
   let { selectedChat, setSelectedChat } = ChatState();
@@ -22,7 +22,7 @@ const RecentChats = ({ chats, loggedUser }) => {
       >
         #Groups
       </Text>
-      <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
+      <Box className="flex flex-col h-auto overflow-hidden max-h-[350px]">
         {chats
           .filter((c) => c.isGroup === true)
           ?.map((data, index) => (
@@ -31,7 +31,7 @@ const RecentChats = ({ chats, loggedUser }) => {
               item={data}
               loggedUser={loggedUser}
               selectedChat={selectedChat}
-              handleChat={() => startChat(data?._id)}
+              handleChat={() => startChat(data)}
             />
           ))}
       </Box>

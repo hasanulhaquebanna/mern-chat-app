@@ -7,12 +7,14 @@ import RecentChatCard from "libs/RecentChatCard";
 
 const RecentChats = ({ chats, loggedUser }) => {
   let { selectedChat, setSelectedChat } = ChatState();
-  let startChat = (userId) => {
-    setSelectedChat(userId);
+  let startChat = (user) => {
+    setSelectedChat(user);
+    console.log(user);
+    localStorage.setItem("deafultChat", JSON.stringify(user?._id));
   };
 
   return (
-    <Box className={classNames("pt-8", chats && "mt-8")}>
+    <Box className={classNames("pt-4", chats && "mt-8")}>
       <Text
         textDecoration="underline"
         fontSize="18px"
@@ -22,7 +24,7 @@ const RecentChats = ({ chats, loggedUser }) => {
       >
         #Recents
       </Text>
-      <Box className="flex flex-col min-h-[200px] overflow-hidden max-h-[500px]">
+      <Box className="flex flex-col h-auto overflow-y-auto max-h-[220px]">
         {chats
           .filter((c) => c.isGroup !== true)
           ?.map((data, index) => (
@@ -31,7 +33,7 @@ const RecentChats = ({ chats, loggedUser }) => {
               item={data}
               loggedUser={loggedUser}
               selectedChat={selectedChat}
-              handleChat={() => startChat(data?._id)}
+              handleChat={() => startChat(data)}
             />
           ))}
       </Box>

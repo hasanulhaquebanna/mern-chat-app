@@ -10,7 +10,7 @@ import GroupChats from "./GroupChats";
 import GroupModal from "./GroupModal";
 
 const ChatMenu = ({ user }) => {
-  let { myChats } = ChatState();
+  let { myChats, setSelectedChat, selectedChat } = ChatState();
   let { isOpen, onOpen, onClose } = useDisclosure();
   let [recentChats, setRecentChats] = useState([]);
   let [loggedUser, setLoggedUser] = useState();
@@ -20,7 +20,7 @@ const ChatMenu = ({ user }) => {
       const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
         headers: {
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
+            JSON.parse(localStorage.getItem("userInfo"))?.token
           }`,
         },
       });
@@ -33,18 +33,22 @@ const ChatMenu = ({ user }) => {
   };
 
   useEffect(() => {
+    const random = Math.floor(
+      Math.random(recentChats.length) * recentChats.length
+    );
+    !selectedChat &&
+      recentChats?.slice(random, random + 1)?.map((c) => setSelectedChat(c));
+  }, [recentChats, setSelectedChat]);
+
+  useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     getChats();
-    console.log(recentChats);
   }, [myChats]);
 
   return (
     <Box
       marginLeft="80px"
       background="rgba( 255, 255, 255, 0.22 )"
-      boxShadow="-5px 5px 50px 0 rgb(82 82 92 / 37%)"
-      backdropFilter="blur( 8px )"
-      border="1px solid rgba( 255, 255, 255, 0.18 )"
       className=" w-[20%] h-screen"
       minHeight="100vh"
     >
@@ -76,12 +80,9 @@ const ChatMenu = ({ user }) => {
           loggedUser={loggedUser}
         />
         {/* creating group end */}
-        {recentChats && (
-          <GroupChats chats={recentChats} loggedUser={loggedUser} />
-        )}
-        {recentChats && (
-          <RecentChats chats={recentChats} loggedUser={loggedUser} />
-        )}
+
+        <GroupChats chats={recentChats} loggedUser={loggedUser} />
+        <RecentChats chats={recentChats} loggedUser={loggedUser} />
       </Box>
     </Box>
   );

@@ -6,7 +6,7 @@ const messageModel = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    info: {
+    message: {
       type: String,
       trim: true,
     },
@@ -20,4 +20,4 @@ const messageModel = mongoose.Schema(
   }
 );
 
-module.export = mongoose.model("Message", messageModel);
+module.exports = mongoose.model("Message", messageModel);
