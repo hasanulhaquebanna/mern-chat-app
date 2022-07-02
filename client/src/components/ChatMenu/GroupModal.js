@@ -38,7 +38,7 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
     }
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
+        `${process.env.REACT_APP_SERVER}/api/user/searchusers?search=${search}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -70,7 +70,7 @@ const GroupModal = ({ isOpen, onClose, user, loggedUser }) => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER}group/creategroup`,
+        `${process.env.REACT_APP_SERVER}/apigroup/creategroup`,
         {
           name: groupName,
           users: JSON.stringify(selectedUsers.map((user) => user._id)),

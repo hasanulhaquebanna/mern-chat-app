@@ -35,7 +35,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
     }
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER}user/searchusers?search=${search}`,
+        `${process.env.REACT_APP_SERVER}/api/user/searchusers?search=${search}`,
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -54,7 +54,7 @@ const SideDrawer = ({ isOpen, onClose, btnRef, user }) => {
   let createChat = async (userId) => {
     try {
       let { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER}chats`,
+        `${process.env.REACT_APP_SERVER}/api/chats`,
         { userId },
         {
           headers: {

@@ -17,13 +17,16 @@ const ChatMenu = ({ user }) => {
 
   let getChats = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_SERVER}chats`, {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo"))?.token
-          }`,
-        },
-      });
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/chats`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("userInfo"))?.token
+            }`,
+          },
+        }
+      );
       data && setRecentChats(data);
     } catch (error) {
       toast.error(error.message, {

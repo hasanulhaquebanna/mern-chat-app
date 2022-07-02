@@ -14,7 +14,7 @@ const ChatFooter = ({ messages, setMessages }) => {
     try {
       setMessage("");
       const { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER}messages`,
+        `${process.env.REACT_APP_SERVER}/api/messages`,
         {
           message,
           chatId: selectedChat?._id,

@@ -11,7 +11,6 @@ import axios from "axios";
 
 // socket
 let socket, selectedChatCompare;
-const SERVER_END = "http://localhost:8000";
 
 const Chat = () => {
   let [messages, setMessages] = useState([]);
@@ -20,7 +19,7 @@ const Chat = () => {
     if (!selectedChat) return;
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER}messages/${selectedChat?._id}`,
+        `${process.env.REACT_APP_SERVER}/api/messages/${selectedChat?._id}`,
         {
           headers: {
             Authorization: `Bearer ${
@@ -36,7 +35,7 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    socket = io(SERVER_END);
+    socket = io(process.env.REACT_APP_SERVER);
   }, [selectedChat]);
 
   useEffect(() => {

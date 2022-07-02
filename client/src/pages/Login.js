@@ -33,7 +33,7 @@ const Login = () => {
       } else {
         setTimeout(async () => {
           const { data } = await axios.post(
-            `${process.env.REACT_APP_SERVER}auth/user/signin`,
+            `${process.env.REACT_APP_SERVER}/api/auth/user/signin`,
             {
               email,
               password,
