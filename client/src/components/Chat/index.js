@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/react";
 
-import { ChatState } from "context/ChatContext";
 import { MessageBody } from "components";
 import ChatHeader from "./ChatHeader";
 import ChatFooter from "./ChatFooter";
