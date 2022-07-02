@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
+import io from "socket.io-client";
 
 import { MessageBody } from "components";
 import ChatHeader from "./ChatHeader";
@@ -7,6 +8,10 @@ import ChatFooter from "./ChatFooter";
 import { ChatState } from "context/ChatContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+
+// socket
+let socket, selectedChatCompare;
+const SERVER_END = "http://localhost:8000";
 
 const Chat = () => {
   let [messages, setMessages] = useState([]);
@@ -29,6 +34,10 @@ const Chat = () => {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    socket = io(SERVER_END);
+  }, [selectedChat]);
 
   useEffect(() => {
     getMessages();
