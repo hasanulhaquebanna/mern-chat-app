@@ -19,3 +19,29 @@ export const verifyLastMessage = (messages, index, loggedUserId) => {
     messages[messages.length - 1]?.sender._id
   );
 };
+
+export const verifySameSenderMargin = (
+  messages,
+  message,
+  index,
+  loggedUserId
+) => {
+  if (
+    index < messages.length - 1 &&
+    messages[index + 1]?.sender._id === message?.sender._id &&
+    messages[index]?.sender._id !== loggedUserId
+  )
+    return 33;
+  else if (
+    (index < messages.length - 1 &&
+      messages[index + 1]?.sender._id !== message?.sender._id &&
+      messages[index]?.sender._id !== loggedUserId) ||
+    (index === messages.length - 1 &&
+      messages[index]?.sender._id !== loggedUserId)
+  )
+    return 0;
+  else return "auto";
+};
+export const verifySameUser = (messages, message, index) => {
+  return index > 0 && messages[index - 1].sender._id === message.sender._id;
+};

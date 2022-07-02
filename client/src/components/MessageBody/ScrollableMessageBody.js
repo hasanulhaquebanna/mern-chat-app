@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ChatState } from "context/ChatContext";
-
 import ScrollableFeed from "react-scrollable-feed";
+
+import { ChatState } from "context/ChatContext";
 import Message from "./Message";
 
 const ScrollableMessageBody = ({ messages }) => {
