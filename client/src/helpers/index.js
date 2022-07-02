@@ -1,4 +1,15 @@
 import Image from "./Image";
-import { getGroupUsers, getChatUser } from "./getFunctionInfo.js";
+import {
+  getGroupUsers,
+  getChatUser,
+  verifySameSender,
+  verifyLastMessage,
+} from "./getFunctionInfo.js";
 
-export { Image, getChatUser, getGroupUsers };
+export {
+  Image,
+  getChatUser,
+  getGroupUsers,
+  verifySameSender,
+  verifyLastMessage,
+};

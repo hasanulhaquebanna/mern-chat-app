@@ -17,23 +17,19 @@ module.exports = asyncHandler(async (req, res) => {
       chatId,
     };
 
-    let latestMessage = await Messages.create(messageObj);
-    latestMessage = await latestMessage.populate("sender", "name picture");
-    latestMessage = await latestMessage.populate("chat");
-    latestMessage = await Users.populate(latestMessage, {
+    let messages = await Messages.create(messageObj);
+
+    messages = await messages.populate("sender", "name picture");
+    messages = await messages.populate("chat");
+    messages = await Users.populate(messages, {
       path: "chat.users",
       select: "name picture email",
     });
-    await Chats.findByIdAndUpdate(
-      req.body.chatId,
-      {
-        latestMessage,
-      },
-      {
-        new: true,
-      }
-    );
-    res.json(latestMessage);
+
+    await Chats.findByIdAndUpdate(req.body.chatId, {
+      latestMessage: messages,
+    });
+    res.json(messages);
   } catch (error) {
     return res.json({ error: error.message });
   }
