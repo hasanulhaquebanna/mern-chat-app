@@ -31,7 +31,7 @@ const Chat = () => {
 
   useEffect(() => {
     getMessages();
-  }, [selectedChat]);
+  }, [selectedChat, setMessages]);
   return (
     <Box
       marginLeft="0px"

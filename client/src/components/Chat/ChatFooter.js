@@ -26,7 +26,8 @@ const ChatFooter = ({ messages, setMessages }) => {
           },
         }
       );
-      data && setMessages([data]);
+      // setMessages([...messages, data]);
+      console.log(data);
     } catch (error) {
       toast.error(error.message);
     }

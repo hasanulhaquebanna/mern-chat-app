@@ -19,6 +19,11 @@ const userModel = new mongoose.Schema(
       type: String,
       default: "https://img.icons8.com/ios-filled/344/user-male-circle.png",
     },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
