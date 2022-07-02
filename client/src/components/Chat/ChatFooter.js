@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import { ChatState } from "context/ChatContext";
 import axios from "axios";
 
-const ChatFooter = () => {
-  let { user, selectedChat, setMessages } = ChatState();
+const ChatFooter = ({ messages, setMessages }) => {
+  let { user, selectedChat } = ChatState();
   let [message, setMessage] = useState("");
 
   let handleFormSubmit = async (e) => {
@@ -17,7 +17,7 @@ const ChatFooter = () => {
         `${process.env.REACT_APP_SERVER}messages`,
         {
           message,
-          chatId: selectedChat._id,
+          chatId: selectedChat?._id,
         },
         {
           headers: {
@@ -26,7 +26,7 @@ const ChatFooter = () => {
           },
         }
       );
-      setMessages(data);
+      data && setMessages([data]);
     } catch (error) {
       toast.error(error.message);
     }

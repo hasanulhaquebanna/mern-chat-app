@@ -9,7 +9,7 @@ const ScrollableMessageBody = ({ messages }) => {
   console.log(messages);
   return (
     <ScrollableFeed>
-      {messages.map((message, index) => (
+      {messages?.map((message, index) => (
         <Message
           messages={messages}
           message={message}
