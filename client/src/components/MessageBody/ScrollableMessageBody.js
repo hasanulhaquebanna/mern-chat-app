@@ -1,12 +1,11 @@
+import * as React from "react";
 import { ChatState } from "context/ChatContext";
-import React from "react";
 
-import ScrollableFeed from "react-scrollable-feed-virtualized";
+import ScrollableFeed from "react-scrollable-feed";
 import Message from "./Message";
 
 const ScrollableMessageBody = ({ messages }) => {
   let { user } = ChatState();
-  console.log(messages);
   return (
     <ScrollableFeed>
       {messages?.map((message, index) => (

@@ -26,10 +26,10 @@ const ChatFooter = ({ messages, setMessages }) => {
           },
         }
       );
-      // setMessages([...messages, data]);
+      setMessages([...messages, data]);
       console.log(data);
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
   let handleMessageForm = (e) => {

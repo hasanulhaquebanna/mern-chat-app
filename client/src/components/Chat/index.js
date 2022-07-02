@@ -12,6 +12,7 @@ const Chat = () => {
   let [messages, setMessages] = useState([]);
   let { selectedChat } = ChatState();
   let getMessages = async () => {
+    if (!selectedChat) return;
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_SERVER}messages/${selectedChat?._id}`,
@@ -23,7 +24,7 @@ const Chat = () => {
           },
         }
       );
-      data && setMessages([...messages, data]);
+      setMessages(data);
     } catch (error) {
       toast.error(error.message);
     }
@@ -31,7 +32,7 @@ const Chat = () => {
 
   useEffect(() => {
     getMessages();
-  }, [selectedChat, setMessages]);
+  }, [selectedChat]);
   return (
     <Box
       marginLeft="0px"

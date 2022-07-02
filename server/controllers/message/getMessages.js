@@ -5,7 +5,7 @@ const Messages = require("../../models/messages");
 module.exports = asyncHandler(async (req, res) => {
   try {
     const messages = await Messages.find({ chat: req.params.chatId })
-      .populate("sender", "name pictur email")
+      .populate("sender", "name picture email")
       .populate("chat");
 
     res.json(messages);
