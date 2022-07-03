@@ -52,7 +52,7 @@ const ChatMenu = ({ user }) => {
     <Box
       marginLeft="80px"
       background="rgba( 255, 255, 255, 0.22 )"
-      className=" w-[20%] h-screen"
+      className=" w-[25%] h-screen"
       minHeight="100vh"
     >
       <Box display="flex" flexDirection="column" className="relative">

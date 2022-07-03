@@ -56,4 +56,25 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   console.log("socket connected");
+
+  // specific chat user
+  socket.on("setup", (user) => {
+    socket.join(user.id);
+    console.log(user.id);
+  });
+
+  // specific room
+  socket.on("join chat room", (room) => {
+    socket.join(room);
+  });
+
+  socket.on("new message", (newMssageReceived) => {
+    let chat = newMssageReceived.chat;
+    chat.users.forEach((user) => {
+      if (user._id !== newMssageReceived.sender._id) return;
+
+      socket.in(user._id).emit("message recived", newMssageReceived);
+    });
+    console.log(newMssageReceived);
+  });
 });

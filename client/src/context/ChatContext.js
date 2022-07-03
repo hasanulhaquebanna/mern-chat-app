@@ -8,6 +8,7 @@ const ChatProvider = ({ children }) => {
   let [user, setUser] = useState("");
   let [myChats, setMyChats] = useState([]);
   let [selectedChat, setSelectedChat] = useState();
+  let [selectChatInfo, setSelectChatInfo] = useState(false);
 
   const getUser = async () => {
     const userInfo = await JSON.parse(localStorage.getItem("userInfo"));
@@ -28,6 +29,8 @@ const ChatProvider = ({ children }) => {
         setMyChats,
         selectedChat,
         setSelectedChat,
+        selectChatInfo,
+        setSelectChatInfo,
       }}
     >
       {children}
